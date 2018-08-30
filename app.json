@@ -1,0 +1,18 @@
+{
+  "expo": {
+    "name": "askApiko",
+    "description": "Apiko React Native course demo application",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "platforms": [
+      "ios",
+      "android"
+    ],
+    "splash": {
+      "image": "./assets/images/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "sdkVersion": "29.0.0"
+  }
+}

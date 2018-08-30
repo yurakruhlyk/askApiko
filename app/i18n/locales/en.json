@@ -1,0 +1,7 @@
+{
+  "appName": "rn-boilerplate",
+  "errors": {
+    "somethingWrong": "Something went wrong",
+    "openLinkError": "Cannot open the link"
+  }
+}
