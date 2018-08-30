@@ -29,6 +29,15 @@ const colors = {
   drawerButton: {
     color: accent,
   },
+
+  drawerItem: {
+    background: '#FFFFFF',
+    activeBackground: '#FF9801',
+    text: '#000',
+    activeText: '#fff',
+    activeIcon: '#fff',
+    icon: '#000',
+  },
 };
 
 export default colors;

@@ -7,4 +7,9 @@ export default {
     backgroundColor: colors.header.background,
   },
   headerTintColor: colors.accent,
+  headerTitleStyle: {
+    flex: 1,
+    textAlign: 'center',
+    alignSelf: 'center',
+  },
 };
