@@ -1,4 +1,4 @@
-const accent = '#ff8c00';
+const accent = '#ff9801';
 const primary = '#cd1543';
 const primaryText = '#2d2f33';
 const secondary = '#4676b4';
@@ -21,6 +21,14 @@ const colors = {
   darkGray,
   separator,
   border,
+
+  header: {
+    background: '#f7f7f7',
+  },
+
+  drawerButton: {
+    color: accent,
+  },
 };
 
 export default colors;
