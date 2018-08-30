@@ -27,7 +27,7 @@ const UnauthorizedDrawer = (props) => {
         style={globalStyles.fillAll}
         forceInset={{ top: 'always', horizontal: 'never' }}
       >
-        <Logo borderBottom />
+        <Logo borderBottom drawer />
 
         {items.map((item, index) => (
           <DrawerItem

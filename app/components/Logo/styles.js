@@ -8,7 +8,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingHorizontal: 34,
   },
-  image: {
+  headerImage: {
+    resizeMode: 'contain',
+    height: 22,
+    width: 92,
+  },
+  drawerImage: {
     resizeMode: 'contain',
     width: '100%',
   },

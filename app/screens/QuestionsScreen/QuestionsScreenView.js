@@ -28,8 +28,9 @@ QuestionsScreenView.propTypes = {
 };
 
 QuestionsScreenView.navigationOptions = ({ navigation }) => ({
-  headerTitle: <Logo />,
+  headerTitle: <Logo header />,
   headerLeft: <DrawerButton onPress={() => navigation.toggleDrawer()} />,
+  headerRight: <View />,
   ...headerStyles,
 });
 

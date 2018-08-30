@@ -8,6 +8,8 @@ import s from './styles';
 const Logo = ({
   borderBottom,
   borderTop,
+  header,
+  drawer,
 }) => (
   <View style={[
     s.container,
@@ -17,7 +19,10 @@ const Logo = ({
   >
     <Image
       source={logo}
-      style={s.image}
+      style={[
+        header && s.headerImage,
+        drawer && s.drawerImage,
+      ]}
     />
   </View>
 );
@@ -26,6 +31,8 @@ const Logo = ({
 Logo.propTypes = {
   borderBottom: T.bool,
   borderTop: T.bool,
+  header: T.bool,
+  drawer: T.bool,
 };
 
 export default Logo;
