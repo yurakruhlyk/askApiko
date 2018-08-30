@@ -29,6 +29,17 @@ class AlertService {
       ],
     );
   }
+
+  signOut(onPress) {
+    this.showAlert(
+      'Sign Out',
+      'Are you sure?',
+      [
+        { text: 'Yes', onPress },
+        { text: 'No', style: 'cancel' },
+      ],
+    );
+  }
 }
 
 const alertService = new AlertService();

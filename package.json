@@ -23,6 +23,7 @@
     "preset": "jest-expo"
   },
   "dependencies": {
+    "@expo/vector-icons": "^6.3.1",
     "axios": "^0.18.0",
     "deepmerge": "^2.1.1",
     "ex-react-native-i18n": "0.0.4",
