@@ -16,8 +16,6 @@ const enhancer = compose(
     navigateToQuestion: ({ navigation }) => () => navigation.navigate(screens.Question),
     navigateToAuthorizedApp: ({ navigation }) => () =>
       navigation.navigate(screens.AuthorizedApp),
-    navigateToUnauthorizedApp: ({ navigation }) => () =>
-      navigation.navigate(screens.UnauthorizedApp),
   })
 );
 

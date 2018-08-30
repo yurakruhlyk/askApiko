@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 import T from 'prop-types';
+import { headerStyles } from '../../styles';
 import s from './styles';
 
 const RestorePasswordScreenView = () => (
@@ -11,7 +12,8 @@ const RestorePasswordScreenView = () => (
 RestorePasswordScreenView.propTypes = {
 };
 
-RestorePasswordScreenView.navigationOptions = ({ navigation }) => ({
-});
+RestorePasswordScreenView.navigationOptions = {
+  ...headerStyles,
+};
 
 export default RestorePasswordScreenView;

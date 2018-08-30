@@ -8,7 +8,6 @@ import s from './styles';
 const QuestionsScreenView = ({
   navigateToQuestion,
   navigateToAuthorizedApp,
-  navigateToUnauthorizedApp,
 }) => (
   <View>
     <Text style={globalStyles.withMarginBottom}>Questions Page</Text>
@@ -18,7 +17,6 @@ const QuestionsScreenView = ({
     <Text style={globalStyles.withMarginBottom} onPress={navigateToAuthorizedApp}>
       Click for Sign In
     </Text>
-    <Text onPress={navigateToUnauthorizedApp}>Click for Sign out</Text>
   </View>
 );
 QuestionsScreenView.propTypes = {
