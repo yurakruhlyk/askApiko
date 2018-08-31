@@ -15,3 +15,14 @@ export const iosStatusBarHeight = isIphoneX() ? 44 : 20;
 export const STATUSBAR_HEIGHT = isAndroid
   ? StatusBar.currentHeight
   : iosStatusBarHeight;
+
+export default {
+  indent,
+  halfIndent,
+  doubleIndent,
+  container,
+  borderRadius,
+  device,
+  iosStatusBarHeight,
+  STATUSBAR_HEIGHT,
+};
