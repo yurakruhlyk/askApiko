@@ -13,7 +13,12 @@ import {
 import { globalStyles, headerStyles, dimensions } from '../../styles';
 import s from './styles';
 
-const SignUpScreenView = ({ navigateToSignIn, onChange, isValid }) => (
+const SignUpScreenView = ({
+  navigateToSignIn,
+  isValid,
+  onChange,
+  onSubmit,
+}) => (
   <ScrollView
     contentContainerStyle={s.root}
     keyboardShouldPersistTaps="handled"
@@ -45,15 +50,16 @@ const SignUpScreenView = ({ navigateToSignIn, onChange, isValid }) => (
     </View>
     <KeyboardAvoidingView offset={dimensions.doubleIndent} style={globalStyles.fillAll}>
       <View style={s.bottom}>
-        <Button title="Sign Up" disabled={!isValid} onPress={navigateToSignIn} />
+        <Button title="Sign Up" disabled={!isValid} onPress={onSubmit} />
       </View>
     </KeyboardAvoidingView>
   </ScrollView>
 );
 SignUpScreenView.propTypes = {
   navigateToSignIn: T.func,
-  onChange: T.func,
   isValid: T.bool,
+  onChange: T.func,
+  onSubmit: T.func,
 };
 
 SignUpScreenView.navigationOptions = ({ navigation }) => ({

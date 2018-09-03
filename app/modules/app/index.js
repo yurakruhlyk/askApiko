@@ -1,7 +1,7 @@
-import reducer from './reducers';
+import reducer from './reducer';
 
-export { default as appOperations } from './operations';
-export { default as appActions } from './actions';
-export { default as appTypes } from './types';
+export * as appOperations from './operations';
+export * as appActions from './actions';
+export * as appTypes from './types';
 
 export default reducer;

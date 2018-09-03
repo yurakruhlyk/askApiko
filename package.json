@@ -11,7 +11,8 @@
     "test": "jest",
     "lint": "eslint --format=node_modules/eslint-formatter-pretty .",
     "precommit": "lint-staged",
-    "prepush": "npm run lint"
+    "prepush": "npm run lint",
+    "remotedev": "remotedev --hostname=localhost --port=8000"
   },
   "lint-staged": {
     "app/**/*.js": [
@@ -28,9 +29,7 @@
     "deepmerge": "^2.1.1",
     "ex-react-native-i18n": "0.0.4",
     "expo": "^29.0.0",
-    "i": "^0.3.6",
     "moment": "^2.22.2",
-    "npm": "^6.4.1",
     "prop-types": "^15.6.2",
     "ramda": "^0.25.0",
     "react": "16.3.1",
@@ -45,7 +44,6 @@
     "redux": "^4.0.0",
     "redux-actions": "^2.6.1",
     "redux-thunk": "^2.3.0",
-    "remote-redux-devtools": "^0.5.13",
     "reselect": "^3.0.1",
     "socket.io-client": "^2.1.1"
   },
@@ -59,10 +57,11 @@
     "eslint-plugin-react": "^7.6.1",
     "eslint-plugin-react-native": "^3.2.1",
     "husky": "^0.14.3",
+    "jest-expo": "~27.0.0",
     "lint-staged": "^7.2.0",
     "prettier-eslint": "^8.8.1",
     "react-native-scripts": "1.14.0",
-    "jest-expo": "~27.0.0",
-    "react-test-renderer": "16.3.1"
+    "react-test-renderer": "16.3.1",
+    "remote-redux-devtools": "^0.5.13"
   }
 }

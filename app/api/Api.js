@@ -13,6 +13,16 @@ class Api {
   mockCall() { // eslint-disable-line
     return new Promise(res => setTimeout(res, 1000));
   }
+
+  signUp({ username, email, password }) {
+    return axios.post(`${this._baseUrl}/auth/sign-up`, {
+      email,
+      password,
+      profile: {
+        fullName: username,
+      },
+    });
+  }
 }
 
 const api = new Api(BASE_URL);
