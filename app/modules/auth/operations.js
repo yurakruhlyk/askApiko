@@ -7,9 +7,13 @@ import {
   signInStart,
   signInSuccess,
   signInError,
+
+  signOut,
 } from './actions';
 import { authToken } from '../../utils/authToken';
 import { getErrMessage } from '../../utils/errorHelper';
+import { NavigationService } from '../../services';
+import screens from '../../constants/screens';
 
 const signUp = ({ username, email, password }) => async (dispatch) => {
   try {
@@ -45,8 +49,15 @@ const signIn = ({ email, password }) => async (dispatch) => {
   }
 };
 
+const logout = () => async (dispatch) => {
+  dispatch(signOut());
+  await authToken.remove();
+  NavigationService.navigate(screens.UnauthorizedApp);
+};
+
 export default {
   signUp,
   signIn,
+  logout,
 };
 

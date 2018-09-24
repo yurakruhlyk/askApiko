@@ -1,10 +1,13 @@
 import React from 'react';
 import T from 'prop-types';
+import { compose, withHandlers } from 'recompose';
+import { connect } from 'react-redux';
 import { ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
 import { DrawerItem, Logo } from '../../../components';
-import screens from '../../../constants/screens';
+import { authOperations } from '../../../modules/auth';
 import { LinkingService, AlertService } from '../../../services';
+import screens from '../../../constants/screens';
 import { globalStyles } from '../../../styles';
 
 const AuthorizedDrawer = (props) => {
@@ -25,9 +28,7 @@ const AuthorizedDrawer = (props) => {
     {
       label: 'Sign Out',
       key: 'SignOut',
-      onPress: () => AlertService.signOut(
-        () => props.navigation.navigate(screens.UnauthorizedApp)
-      ),
+      onPress: () => AlertService.signOut(props.signOut),
       iconName: 'md-log-in',
     },
   ];
@@ -56,6 +57,19 @@ AuthorizedDrawer.propTypes = {
   navigation: T.shape({
     navigate: T.func,
   }),
+  signOut: T.func,
 };
 
-export default AuthorizedDrawer;
+const mapDispatchToProps = {
+  logout: authOperations.logout,
+};
+
+const enhancer = compose(
+  connect(null, mapDispatchToProps),
+
+  withHandlers({
+    signOut: props => () => props.logout(),
+  })
+);
+
+export default enhancer(AuthorizedDrawer);

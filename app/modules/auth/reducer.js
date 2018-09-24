@@ -35,6 +35,10 @@ export default handleActions(
       isSigningIn: false,
       isSignInError: payload,
     })),
+
+    [types.SIGN_OUT]: mergeDeep({
+      ...INITIAL_STATE,
+    }),
   },
   INITIAL_STATE,
 );
