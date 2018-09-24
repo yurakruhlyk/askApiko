@@ -1,22 +1,52 @@
-import * as actions from './actions';
 import Api from '../../api';
+import {
+  signUpStart,
+  signUpSuccess,
+  signUpError,
+
+  signInStart,
+  signInSuccess,
+  signInError,
+} from './actions';
 import { authToken } from '../../utils/authToken';
 import { getErrMessage } from '../../utils/errorHelper';
 
-export const signUp = ({ username, email, password }) => async (dispatch) => {
+const signUp = ({ username, email, password }) => async (dispatch) => {
   try {
-    dispatch(actions.signUpStart());
-    
+    dispatch(signUpStart());
+
     const res = await Api.signUp({ username, email, password });
-    
+
     await authToken.set(res.data.token);
 
-    dispatch(actions.signUpSuccess());
+    dispatch(signUpSuccess());
   } catch (err) {
-    const { message } = err.response.data;
-    const errorMessage = getErrMessage({ message });
-    
-    dispatch(actions.signUpError(errorMessage));
-    throw new Error(errorMessage);
+    const errMessage = getErrMessage(err);
+
+    dispatch(signUpError(errMessage));
+    throw new Error(errMessage);
   }
 };
+
+const signIn = ({ email, password }) => async (dispatch) => {
+  try {
+    dispatch(signInStart());
+
+    const res = await Api.signIn({ email, password });
+
+    await authToken.set(res.data.token);
+
+    dispatch(signInSuccess());
+  } catch (err) {
+    const errMessage = getErrMessage(err);
+
+    dispatch(signInError(errMessage));
+    throw new Error(errMessage);
+  }
+};
+
+export default {
+  signUp,
+  signIn,
+};
+

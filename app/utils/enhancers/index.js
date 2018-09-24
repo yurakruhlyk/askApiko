@@ -1,7 +1,17 @@
-export { default as didMountWithSetTimeout } from './didMountWithSetTimeout';
-export { default as paramsToProps } from './paramsToProps';
-export { default as setParamsOnDidMount } from './setParamsOnDidMount';
-export { default as withRef } from './withRef';
-export { default as withSpinnerWhileLoading } from './withSpinnerWhileLoading';
-export { default as withToggle } from './withToggle';
-export * as withLoadingModal from './withLoadingModal';
+import didMountWithSetTimeout from './didMountWithSetTimeout';
+import paramsToProps from './paramsToProps';
+import setParamsOnDidMount from './setParamsOnDidMount';
+import withRef from './withRef';
+import withSpinnerWhileLoading from './withSpinnerWhileLoading';
+import withToggle from './withToggle';
+import * as withLoadingModal from './withLoadingModal';
+
+export {
+  didMountWithSetTimeout,
+  paramsToProps,
+  setParamsOnDidMount,
+  withRef,
+  withSpinnerWhileLoading,
+  withToggle,
+  withLoadingModal,
+};

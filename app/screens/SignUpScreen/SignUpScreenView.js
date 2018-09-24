@@ -35,6 +35,7 @@ const SignUpScreenView = ({
         placeholder="email"
         style={s.inputContainer}
         onChange={text => onChange('email', text)}
+        keyboardType="email-address"
       />
       <Input
         placeholder="password"

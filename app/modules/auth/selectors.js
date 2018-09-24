@@ -1,12 +1,24 @@
 import { createSelector } from 'reselect';
 import R from 'ramda';
 
-export const getSignedInState = createSelector(
+const getSignedInState = createSelector(
   R.pathOr(false, ['auth', 'signedIn']),
   state => state,
 );
 
-export const getSigningUpState = createSelector(
+const getSigningUpState = createSelector(
   R.pathOr(false, ['auth', 'isSigningUp']),
   state => state,
 );
+
+const getSigningInState = createSelector(
+  R.pathOr(false, ['auth', 'isSigningIn']),
+  state => state,
+);
+
+
+export default {
+  getSignedInState,
+  getSigningUpState,
+  getSigningInState,
+};

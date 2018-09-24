@@ -14,7 +14,6 @@ export default createDrawerNavigator(
     [screens.Auth]: AuthNavigator,
   },
   {
-    initialRouteName: screens.Auth, // dev
     drawerPosition: 'left',
     contentComponent: UnauthorizedDrawer,
   }

@@ -60,6 +60,7 @@ const enhancer = compose(
 
   withHandlers({
     navigateToSignIn: ({ navigation }) => () => navigation.navigate(screens.SignIn),
+
     onSubmit: props => async () => {
       if (props.isValid) {
         try {
@@ -70,12 +71,12 @@ const enhancer = compose(
 
           props.navigation.navigate(screens.AuthorizedApp);
         } catch (err) {
-          AlertService.showErrorAlert(err.message);
+          AlertService.showErrorAlertWithTimeout(err.message);
         }
       }
     },
   })
-  
+
 );
 
 export default hoistStatics(enhancer)(SignUpScreenView);

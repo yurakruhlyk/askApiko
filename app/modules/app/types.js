@@ -1,1 +1,3 @@
-export const INITIALIZED = 'app/INITIALIZED';
+export default {
+  INITIALIZED: 'app/INITIALIZED',
+};

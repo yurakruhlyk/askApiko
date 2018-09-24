@@ -10,6 +10,7 @@ const Input = ({
   style,
   onChange,
   secureTextEntry,
+  ...props
 }) => (
   <TextInput
     style={[s.input, style]}
@@ -18,6 +19,7 @@ const Input = ({
     onChangeText={onChange}
     secureTextEntry={secureTextEntry}
     underlineColorAndroid={colors.input.background}
+    {...props}
   />
 );
 

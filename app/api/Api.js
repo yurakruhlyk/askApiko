@@ -23,6 +23,13 @@ class Api {
       },
     });
   }
+
+  signIn({ email, password }) {
+    return axios.post(`${this._baseUrl}/auth/sign-in`, {
+      email,
+      password,
+    });
+  }
 }
 
 const api = new Api(BASE_URL);
