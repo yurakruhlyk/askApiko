@@ -1,4 +1,4 @@
-import reducer from './reducers';
+import reducer from './reducer';
 
 export { default as appOperations } from './operations';
 export { default as appActions } from './actions';

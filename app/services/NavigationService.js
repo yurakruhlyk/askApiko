@@ -1,5 +1,5 @@
 import { NavigationActions, StackActions } from 'react-navigation';
-import screens from '../constants/screens';
+// import screens from '../constants/screens';
 
 class NavigationService {
   constructor() {
@@ -73,10 +73,6 @@ class NavigationService {
 
   goBack() {
     this._navigation.dispatch(NavigationActions.back());
-  }
-
-  navigateToAuth() {
-    this.navigate({ routeName: screens.Auth });
   }
 }
 

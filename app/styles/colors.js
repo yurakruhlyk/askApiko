@@ -1,29 +1,39 @@
 const accent = '#ff9801';
-const primary = '#cd1543';
-const primaryText = '#2d2f33';
-const secondary = '#4676b4';
-const secondaryText = '#656979';
+const black = '#000000';
 const white = '#ffffff';
-const lightGray = '#dadada';
-const darkGray = '#a1a9c3';
+const grey = '#bfbfbf';
+const skyBlue = '#00A0ff';
+const steelBlue = '#4676B4';
+const whiteSmoke = '#f7f7f7';
 const separator = '#c6c6c6';
 const border = '#c6c6c6';
 
 const colors = {
   accent,
-  accentText: accent,
-  primary,
-  primaryText,
-  secondary,
-  secondaryText,
+  primaryText: black,
   white,
-  lightGray,
-  darkGray,
+  black,
+  grey,
   separator,
   border,
 
   header: {
-    background: '#f7f7f7',
+    background: whiteSmoke,
+  },
+
+  input: {
+    background: white,
+    border: accent,
+  },
+
+  button: {
+    background: skyBlue,
+    title: white,
+    disabled: '#D2D5DB',
+  },
+
+  link: {
+    color: steelBlue,
   },
 
   drawerButton: {
@@ -31,12 +41,20 @@ const colors = {
   },
 
   drawerItem: {
-    background: '#FFFFFF',
-    activeBackground: '#FF9801',
-    text: '#000',
-    activeText: '#fff',
-    activeIcon: '#fff',
-    icon: '#000',
+    background: white,
+    activeBackground: accent,
+    text: black,
+    activeText: white,
+    activeIcon: white,
+    icon: black,
+  },
+
+  pageTitle: {
+    color: black,
+  },
+
+  signUpScreen: {
+    background: whiteSmoke,
   },
 };
 

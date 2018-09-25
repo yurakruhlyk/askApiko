@@ -1,4 +1,4 @@
 import { createAction } from 'redux-actions';
-import * as types from './types';
+import types from './types';
 
 export const initialized = createAction(types.INITIALIZED);

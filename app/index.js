@@ -5,9 +5,8 @@ import { Provider } from 'react-redux';
 import { compose, withHandlers, lifecycle } from 'recompose';
 import store from './store';
 import { globalStyles } from './styles';
-// import { appOperations } from './modules/app';
+import { appOperations } from './modules/app';
 import { loadAssets, loadFonts } from './utils';
-import { withToggle } from './utils/enhancers';
 import { isAndroid } from './utils/detectDevice';
 import Navigator from './navigation';
 
@@ -17,7 +16,7 @@ if (isAndroid) {
   }
 }
 
-const App = ({ isReady }) => isReady && (
+const App = () => (
   <Provider store={store}>
     <View style={globalStyles.fillAll}>
       <StatusBar barStyle="dark-content" />
@@ -27,16 +26,13 @@ const App = ({ isReady }) => isReady && (
 );
 
 const enhance = compose(
-  withToggle('isReady', 'toggleIsReady', 'onToggleIsReady'),
   withHandlers({
-    asyncJob: props => async () => {
+    asyncJob: () => async () => {
       await Promise.all([
         loadAssets(),
         loadFonts(),
-        // store.dispatch(appOperations.initialization()),
+        store.dispatch(appOperations.initialization()),
       ]);
-
-      props.onToggleIsReady();
     },
   }),
   lifecycle({

@@ -5,7 +5,7 @@ import screens from '../constants/screens';
 import AuthorizedAppNavigator from './AuthorizedAppNavigator';
 import UnauthorizedAppNavigator from './UnauthorizedAppNavigator';
 
-export const RootNavigator = createSwitchNavigator({
+const RootNavigator = createSwitchNavigator({
   [screens.AuthorizedApp]: AuthorizedAppNavigator,
   [screens.UnauthorizedApp]: UnauthorizedAppNavigator,
 }, { initialRouteName: screens.UnauthorizedApp });

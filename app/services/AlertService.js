@@ -30,6 +30,18 @@ class AlertService {
     );
   }
 
+  showErrorAlert(err) {
+    this.showAlert(
+      'Oops',
+      err,
+      [{ text: 'Ok', style: 'cancel' }],
+    );
+  }
+
+  showErrorAlertWithTimeout(err) {
+    setTimeout(() => this.showErrorAlert(err), 700);
+  }
+
   signOut(onPress) {
     this.showAlert(
       'Sign Out',
