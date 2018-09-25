@@ -9,7 +9,11 @@ import {
   TextLink,
   KeyboardAvoidingView,
 } from '../../components';
-import { globalStyles, headerStyles, dimensions } from '../../styles';
+import {
+  globalStyles,
+  headerStyles,
+  dimensions,
+} from '../../styles';
 import s from './styles';
 
 const SignInScreenView = ({

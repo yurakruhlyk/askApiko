@@ -1,6 +1,7 @@
 const accent = '#ff9801';
 const black = '#000000';
 const white = '#ffffff';
+const grey = '#bfbfbf';
 const skyBlue = '#00A0ff';
 const steelBlue = '#4676B4';
 const whiteSmoke = '#f7f7f7';
@@ -12,6 +13,7 @@ const colors = {
   primaryText: black,
   white,
   black,
+  grey,
   separator,
   border,
 

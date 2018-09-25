@@ -10,6 +10,7 @@ const styles = StyleSheet.create({
   top: {
     flex: 1,
     paddingHorizontal: 17,
+    paddingTop: 16,
   },
   bottom: {
     flex: 1,

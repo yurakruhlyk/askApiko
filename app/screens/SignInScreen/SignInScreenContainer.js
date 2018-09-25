@@ -13,7 +13,7 @@ import {
   isValidPassword,
   trim,
 } from '../../utils/textValidationHelper';
-import { AlertService, NavigationService } from '../../services';
+import { AlertService } from '../../services';
 import { withLoadingModal } from '../../utils/enhancers';
 import screens from '../../constants/screens';
 import SignInScreenView from './SignInScreenView';
