@@ -1,4 +1,3 @@
-import * as R from 'ramda';
 import {
   compose,
   hoistStatics,
@@ -64,10 +63,7 @@ const enhancer = compose(
     onSubmit: props => async () => {
       if (props.isValid) {
         try {
-          await props.signUp(R.pick(
-            ['username', 'email', 'password'],
-            props
-          ));
+          await props.signUp(props.username, props.email, props.password);
 
           props.navigation.navigate(screens.AuthorizedApp);
         } catch (err) {

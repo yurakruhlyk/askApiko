@@ -9,7 +9,7 @@ import T from 'prop-types';
 
 const noop = () => {};
 
-const Button = ({
+const Touchable = ({
   onPress = noop,
   onLongPress = noop,
   onLayout = noop,
@@ -55,14 +55,14 @@ const Button = ({
   );
 };
 
-Button.defaultProps = {
+Touchable.defaultProps = {
   onPress: noop,
   onLongPress: noop,
   onLayout: noop,
   rippleColor: '#d5d3d5',
 };
 
-Button.propTypes = {
+Touchable.propTypes = {
   onPress: T.func,
   children: T.any,
   style: T.any,
@@ -73,4 +73,4 @@ Button.propTypes = {
   borderless: T.bool,
 };
 
-export default Button;
+export default Touchable;

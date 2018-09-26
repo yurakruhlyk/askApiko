@@ -1,28 +1,40 @@
+import * as R from 'ramda';
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, FlatList, Text } from 'react-native';
 import T from 'prop-types';
-import { DrawerButton, Logo } from '../../components';
-import { globalStyles, headerStyles } from '../../styles';
+import {
+  DrawerButton,
+  Logo,
+  PageTitle,
+  Separator,
+  QuestionItem,
+  RootSpinner,
+} from '../../components';
+import { headerStyles } from '../../styles';
 import s from './styles';
 
-const QuestionsScreenView = ({
-  navigateToQuestion,
-  navigateToAuthorizedApp,
-}) => (
-  <View>
-    <Text style={globalStyles.withMarginBottom}>Questions Page</Text>
-    <Text style={globalStyles.withMarginBottom} onPress={navigateToQuestion}>
-      Click for go to Question screen
-    </Text>
-    <Text style={globalStyles.withMarginBottom} onPress={navigateToAuthorizedApp}>
-      Click for Sign In
-    </Text>
+const QuestionsScreenView = ({ questions, isLoading }) => (
+  <View style={s.root}>
+    <PageTitle
+      title="User questions"
+      style={s.pageTitle}
+    />
+    <FlatList
+      data={questions}
+      keyExtractor={R.prop('_id')}
+      ItemSeparatorComponent={Separator}
+      renderItem={({ item }) => <QuestionItem {...item} />}
+      contentContainerStyle={questions.length === 0 && s.containerCenter}
+      ListEmptyComponent={
+        isLoading ? <RootSpinner /> : <Text>Empty</Text>
+      }
+    />
   </View>
 );
+
 QuestionsScreenView.propTypes = {
-  navigateToQuestion: T.func,
-  navigateToAuthorizedApp: T.func,
-  navigateToUnauthorizedApp: T.func,
+  questions: T.array,
+  // navigateToQuestion: T.func,
 };
 
 QuestionsScreenView.navigationOptions = ({ navigation }) => ({

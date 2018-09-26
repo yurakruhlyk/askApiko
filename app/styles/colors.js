@@ -5,6 +5,7 @@ const grey = '#bfbfbf';
 const skyBlue = '#00A0ff';
 const steelBlue = '#4676B4';
 const whiteSmoke = '#f7f7f7';
+const green = '#009C00';
 const separator = '#c6c6c6';
 const border = '#c6c6c6';
 
@@ -29,7 +30,7 @@ const colors = {
   button: {
     background: skyBlue,
     title: white,
-    disabled: '#D2D5DB',
+    disabled: grey,
   },
 
   link: {
@@ -53,9 +54,24 @@ const colors = {
     color: black,
   },
 
+  questionItem: {
+    background: white,
+    votesCount: accent,
+    icon: green,
+    date: grey,
+    author: steelBlue,
+    tagBackground: grey,
+    tagColor: white,
+  },
+
   signUpScreen: {
     background: whiteSmoke,
   },
+
+  questionsScreen: {
+    background: whiteSmoke,
+  },
+
 };
 
 export default colors;

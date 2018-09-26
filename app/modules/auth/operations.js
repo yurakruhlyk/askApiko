@@ -15,11 +15,11 @@ import { getErrMessage } from '../../utils/errorHelper';
 import { NavigationService } from '../../services';
 import screens from '../../constants/screens';
 
-const signUp = ({ username, email, password }) => async (dispatch) => {
+const signUp = (username, email, password) => async (dispatch) => {
   try {
     dispatch(signUpStart());
 
-    const res = await Api.signUp({ username, email, password });
+    const res = await Api.signUp(username, email, password);
 
     await authToken.set(res.data.token);
 
@@ -32,11 +32,11 @@ const signUp = ({ username, email, password }) => async (dispatch) => {
   }
 };
 
-const signIn = ({ email, password }) => async (dispatch) => {
+const signIn = (email, password) => async (dispatch) => {
   try {
     dispatch(signInStart());
 
-    const res = await Api.signIn({ email, password });
+    const res = await Api.signIn(email, password);
 
     await authToken.set(res.data.token);
 
