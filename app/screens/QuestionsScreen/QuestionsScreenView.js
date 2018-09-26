@@ -7,13 +7,19 @@ import {
   Logo,
   PageTitle,
   Separator,
-  QuestionItem,
   RootSpinner,
+  Spinner,
+  QuestionItem,
 } from '../../components';
 import { headerStyles } from '../../styles';
 import s from './styles';
 
-const QuestionsScreenView = ({ questions, isLoading }) => (
+const QuestionsScreenView = ({
+  questions,
+  isLoading,
+  isLoadingMore,
+  getQuestionsMore,
+}) => (
   <View style={s.root}>
     <PageTitle
       title="User questions"
@@ -22,19 +28,24 @@ const QuestionsScreenView = ({ questions, isLoading }) => (
     <FlatList
       data={questions}
       keyExtractor={R.prop('_id')}
+      contentContainerStyle={R.isEmpty(questions) && s.containerCenter}
       ItemSeparatorComponent={Separator}
       renderItem={({ item }) => <QuestionItem {...item} />}
-      contentContainerStyle={questions.length === 0 && s.containerCenter}
+      onEndReachedThreshold={0.7}
+      onEndReached={getQuestionsMore}
       ListEmptyComponent={
         isLoading ? <RootSpinner /> : <Text>Empty</Text>
       }
+      ListFooterComponent={isLoadingMore && <Spinner />}
     />
   </View>
 );
 
 QuestionsScreenView.propTypes = {
   questions: T.array,
-  // navigateToQuestion: T.func,
+  isLoading: T.bool,
+  isLoadingMore: T.bool,
+  getQuestionsMore: T.func,
 };
 
 QuestionsScreenView.navigationOptions = ({ navigation }) => ({

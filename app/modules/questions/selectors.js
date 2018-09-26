@@ -1,17 +1,27 @@
 import { createSelector } from 'reselect';
 import R from 'ramda';
 
-export const getQuestionsLoadingState = createSelector(
+const getQuestionsLoadingState = createSelector(
   R.path(['questions', 'isQuestionsLoading']),
   state => state,
 );
 
-export const getQuestionsLoadingErrorState = createSelector(
+const getQuestionsLoadingErrorState = createSelector(
   R.path(['questions', 'isQuestionsLoadingError']),
   state => state,
 );
 
-export const getQuestionsList = createSelector(
+const getQuestionsLoadingMoreState = createSelector(
+  R.path(['questions', 'isQuestionsLoadingMore']),
+  state => state,
+);
+
+const getQuestionsHasNoMoreState = createSelector(
+  R.path(['questions', 'isQuestionsHasNoMore']),
+  state => state,
+);
+
+const getQuestionsListState = createSelector(
   [
     R.pathOr([], ['questions', 'questionsIds']),
     R.pathOr({}, ['questions', 'questionsEntities']),
@@ -19,9 +29,17 @@ export const getQuestionsList = createSelector(
   (ids, entities) => ids.map(id => entities[id]),
 );
 
+const getQuestionsCountState = createSelector(
+  R.path(['questions', 'questionsIds']),
+  ids => ids.length,
+);
+
 export default {
   getQuestionsLoadingState,
   getQuestionsLoadingErrorState,
-  getQuestionsList,
+  getQuestionsLoadingMoreState,
+  getQuestionsHasNoMoreState,
+  getQuestionsListState,
+  getQuestionsCountState,
 };
 

@@ -2,6 +2,7 @@ import * as R from 'ramda';
 import {
   compose,
   hoistStatics,
+  withHandlers,
   withProps,
   lifecycle,
   pure,
@@ -13,11 +14,13 @@ import { AlertService } from '../../services';
 
 const mapStateToProps = state => ({
   isLoading: questionsSelectors.getQuestionsLoadingState(state),
-  questions: questionsSelectors.getQuestionsList(state),
+  isLoadingMore: questionsSelectors.getQuestionsLoadingMoreState(state),
+  questions: questionsSelectors.getQuestionsListState(state),
 });
 
 const mapDispatchToProps = {
   getQuestions: questionsOperations.getQuestions,
+  getQuestionsMore: questionsOperations.getQuestionsMore,
 };
 
 const enhancer = compose(
@@ -26,6 +29,16 @@ const enhancer = compose(
   withProps(props => ({
     isLoading: props.isLoading && R.isEmpty(props.questions),
   })),
+
+  withHandlers({
+    getQuestionsMore: props => async () => {
+      try {
+        await props.getQuestionsMore();
+      } catch (err) {
+        AlertService.showErrorAlert(err.message);
+      }
+    },
+  }),
 
   lifecycle({
     async componentDidMount() {

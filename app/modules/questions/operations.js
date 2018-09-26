@@ -2,6 +2,9 @@ import {
   getQuestionsStart,
   getQuestionsSuccess,
   getQuestionsError,
+  getQuestionsMoreStart,
+  getQuestionsMoreSuccess,
+  getQuestionsMoreError,
 } from './actions';
 import questionsSelectors from './selectors';
 import Api from '../../api';
@@ -30,7 +33,36 @@ const getQuestions = () => async (dispatch, getState) => {
   }
 };
 
+export const getQuestionsMore = () => async (dispatch, getState) => {
+  try {
+    const isFetchingMore = questionsSelectors.getQuestionsLoadingMoreState(getState());
+    const count = questionsSelectors.getQuestionsCountState(getState());
+    const hasNoMore = questionsSelectors.getQuestionsHasNoMoreState(getState());
+    const limit = 10;
+
+    if (isFetchingMore || hasNoMore) {
+      return;
+    }
+
+    dispatch(getQuestionsMoreStart());
+
+    const res = await Api.getQuestions(limit, count);
+    const payload = normalize(res.data.questions, 'questionsIds', 'questionsEntities');
+
+    dispatch(getQuestionsMoreSuccess({
+      ...payload,
+      hasNoMore: payload.questionsIds.length < limit,
+    }));
+  } catch (err) {
+    const errMessage = getErrMessage(err);
+
+    dispatch(getQuestionsMoreError(errMessage));
+    throw new Error(errMessage);
+  }
+};
+
 export default {
   getQuestions,
+  getQuestionsMore,
 };
 
