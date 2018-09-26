@@ -18,7 +18,9 @@ const QuestionsScreenView = ({
   questions,
   isLoading,
   isLoadingMore,
+  isRefreshing,
   getQuestionsMore,
+  onRefreshQuestions,
 }) => (
   <View style={s.root}>
     <PageTitle
@@ -33,6 +35,8 @@ const QuestionsScreenView = ({
       renderItem={({ item }) => <QuestionItem {...item} />}
       onEndReachedThreshold={0.7}
       onEndReached={getQuestionsMore}
+      refreshing={isRefreshing}
+      onRefresh={onRefreshQuestions}
       ListEmptyComponent={
         isLoading ? <RootSpinner /> : <Text>Empty</Text>
       }
@@ -45,7 +49,9 @@ QuestionsScreenView.propTypes = {
   questions: T.array,
   isLoading: T.bool,
   isLoadingMore: T.bool,
+  isRefreshing: T.bool,
   getQuestionsMore: T.func,
+  onRefreshQuestions: T.func,
 };
 
 QuestionsScreenView.navigationOptions = ({ navigation }) => ({

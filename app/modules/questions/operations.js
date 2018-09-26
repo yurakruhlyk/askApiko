@@ -11,15 +11,15 @@ import Api from '../../api';
 import { normalize } from '../../utils/stateHelper';
 import { getErrMessage } from '../../utils/errorHelper';
 
-const getQuestions = () => async (dispatch, getState) => {
+const getQuestions = (refreshing = false) => async (dispatch, getState) => {
   try {
-    const isFetching = questionsSelectors.getQuestionsLoadingState(getState());
+    const isLoading = questionsSelectors.getQuestionsLoadingState(getState());
 
-    if (isFetching) {
+    if (isLoading) {
       return;
     }
 
-    dispatch(getQuestionsStart());
+    dispatch(getQuestionsStart(refreshing));
 
     const res = await Api.getQuestions();
     const payload = normalize(res.data.questions, 'questionsIds', 'questionsEntities');
@@ -35,12 +35,12 @@ const getQuestions = () => async (dispatch, getState) => {
 
 export const getQuestionsMore = () => async (dispatch, getState) => {
   try {
-    const isFetchingMore = questionsSelectors.getQuestionsLoadingMoreState(getState());
+    const isLoadingMore = questionsSelectors.getQuestionsLoadingMoreState(getState());
     const count = questionsSelectors.getQuestionsCountState(getState());
     const hasNoMore = questionsSelectors.getQuestionsHasNoMoreState(getState());
     const limit = 10;
 
-    if (isFetchingMore || hasNoMore) {
+    if (isLoadingMore || hasNoMore) {
       return;
     }
 

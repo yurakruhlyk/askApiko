@@ -16,6 +16,11 @@ const getQuestionsLoadingMoreState = createSelector(
   state => state,
 );
 
+const getQuestionsRefreshingState = createSelector(
+  R.path(['questions', 'isQuestionsRefreshing']),
+  state => state,
+);
+
 const getQuestionsHasNoMoreState = createSelector(
   R.path(['questions', 'isQuestionsHasNoMore']),
   state => state,
@@ -38,6 +43,7 @@ export default {
   getQuestionsLoadingState,
   getQuestionsLoadingErrorState,
   getQuestionsLoadingMoreState,
+  getQuestionsRefreshingState,
   getQuestionsHasNoMoreState,
   getQuestionsListState,
   getQuestionsCountState,

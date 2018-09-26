@@ -15,6 +15,7 @@ import { AlertService } from '../../services';
 const mapStateToProps = state => ({
   isLoading: questionsSelectors.getQuestionsLoadingState(state),
   isLoadingMore: questionsSelectors.getQuestionsLoadingMoreState(state),
+  isRefreshing: questionsSelectors.getQuestionsRefreshingState(state),
   questions: questionsSelectors.getQuestionsListState(state),
 });
 
@@ -38,6 +39,13 @@ const enhancer = compose(
         AlertService.showErrorAlert(err.message);
       }
     },
+    onRefreshQuestions: props => async () => {
+      try {
+        await props.getQuestions(true);
+      } catch (err) {
+        AlertService.showErrorAlert(err.message);
+      }
+    },
   }),
 
   lifecycle({
@@ -50,7 +58,7 @@ const enhancer = compose(
     },
   }),
 
-  pure
+  pure,
 );
 
 export default hoistStatics(enhancer)(QuestionsScreenView);

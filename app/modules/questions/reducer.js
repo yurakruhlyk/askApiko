@@ -9,6 +9,7 @@ const INITIAL_STATE = {
   isQuestionsLoadingMore: false,
   isQuestionsLoadingMoreError: null,
 
+  isQuestionsRefreshing: false,
   isQuestionsHasNoMore: false,
 
   questionsIds: [],
@@ -17,12 +18,15 @@ const INITIAL_STATE = {
 
 export default handleActions(
   {
-    [types.GET_QUESTIONS_START]: mergeDeep({
+    [types.GET_QUESTIONS_START]: mergeDeep(({ payload }) => ({
       isQuestionsLoading: true,
-    }),
+      isQuestionsRefreshing: payload,
+    })),
     [types.GET_QUESTIONS_SUCCESS]: mergeDeep(({ payload }) => ({
       isQuestionsLoading: false,
       isQuestionsLoadingError: null,
+      isQuestionsRefreshing: false,
+      isQuestionsHasNoMore: false,
 
       questionsIds: payload.questionsIds,
       questionsEntities: payload.questionsEntities,
