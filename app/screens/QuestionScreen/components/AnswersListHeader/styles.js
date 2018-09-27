@@ -1,8 +1,13 @@
 import { StyleSheet } from 'react-native';
-import { colors, fontSizes, fontWeights } from '../../../../styles';
+import {
+  colors,
+  fontSizes,
+  fontWeights
+} from '../../../../styles';
 
 const styles = StyleSheet.create({
   root: {
+    backgroundColor: colors.answerListHeader.background,
     borderTopWidth: StyleSheet.hairlineWidth,
     borderBottomWidth: StyleSheet.hairlineWidth,
     borderColor: colors.border,

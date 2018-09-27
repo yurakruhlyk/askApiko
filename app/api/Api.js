@@ -34,6 +34,10 @@ class Api {
   getQuestions(limit = 10, skip = 0, search = '') {
     return axios.get(`${this._baseUrl}/questions?limit=${limit}&skip=${skip}&search=${search}`);
   }
+
+  getAnswersByQuestionId(id, limit = 5, skip = 0) {
+    return axios.get(`${this._baseUrl}/questions/${id}/answers?limit=${limit}&skip=${skip}`);
+  }
 }
 
 const api = new Api(BASE_URL);

@@ -3,6 +3,7 @@ import { colors, fontSizes, fontWeights } from '../../../../styles';
 
 const styles = StyleSheet.create({
   root: {
+    backgroundColor: colors.authorDetails.background,
     borderTopWidth: StyleSheet.hairlineWidth,
     borderBottomWidth: StyleSheet.hairlineWidth,
     borderColor: colors.border,

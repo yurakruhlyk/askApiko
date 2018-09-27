@@ -7,6 +7,7 @@ import {
 
 const styles = StyleSheet.create({
   header: {
+    backgroundColor: colors.questionDetails.background,
     flexDirection: 'row',
     paddingHorizontal: 17,
     paddingTop: 10,

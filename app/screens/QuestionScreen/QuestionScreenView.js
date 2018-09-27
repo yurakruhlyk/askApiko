@@ -6,7 +6,12 @@ import { QuestionDetail, AnswersList } from './components';
 import { headerStyles } from '../../styles';
 import s from './styles';
 
-const QuestionScreenView = ({ question, answers, answersCount }) => (
+const QuestionScreenView = ({
+  question,
+  answers,
+  answersCount,
+  isLoading,
+}) => (
   <View style={s.root}>
     <QuestionDetail
       title={question.title}
@@ -14,13 +19,18 @@ const QuestionScreenView = ({ question, answers, answersCount }) => (
       createdAt={question.createdAt}
       tags={question.tags}
     />
-    {/*<AnswersList count={answersCount} answers={answers} />*/}
+    <AnswersList
+      count={answersCount}
+      answers={answers}
+      isLoading={isLoading}
+    />
   </View>
 );
 QuestionScreenView.propTypes = {
   question: T.object,
   answers: T.array,
   answersCount: T.number,
+  isLoading: T.bool,
 };
 
 QuestionScreenView.navigationOptions = {

@@ -1,12 +1,26 @@
+import * as R from 'ramda';
 import React from 'react';
-import { View } from 'react-native';
+import { View, FlatList, Text } from 'react-native';
 import T from 'prop-types';
-import { AnswersListHeader } from '../../components';
+import { Separator, RootSpinner } from '../../../../components';
+import { AnswersListHeader, AnswerItem } from '../../components';
 import s from './styles';
 
-const AnswersList = ({ count }) => (
-  <View style={s.root}>
+const AnswersList = ({ count, answers, isLoading }) => (
+  <View>
     <AnswersListHeader count={count} />
+    <FlatList
+      data={answers}
+      keyExtractor={R.prop('_id')}
+      contentContainerStyle={R.isEmpty(answers) && s.containerCenter}
+      ItemSeparatorComponent={Separator}
+      renderItem={({ item }) =>
+        <AnswerItem {...item} />
+      }
+      ListEmptyComponent={
+        isLoading ? <RootSpinner /> : <Text>Empty</Text>
+      }
+    />
   </View>
 );
 

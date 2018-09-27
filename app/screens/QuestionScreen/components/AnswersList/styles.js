@@ -1,10 +1,10 @@
 import { StyleSheet } from 'react-native';
-import { colors, fontSizes, fontWeights } from '../../../../styles';
 
 const styles = StyleSheet.create({
-  root: {
+  containerCenter: {
+    flexGrow: 1,
+    justifyContent: 'center',
   },
-
 });
 
 export default styles;
