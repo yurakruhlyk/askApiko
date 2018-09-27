@@ -9,14 +9,16 @@ import {
 } from 'recompose';
 import { connect } from 'react-redux';
 import { questionsOperations, questionsSelectors } from '../../modules/questions';
-import QuestionsScreenView from './QuestionsScreenView';
 import { AlertService } from '../../services';
+import { onNavigate } from '../../utils/navHelpers';
+import screens from '../../constants/screens';
+import QuestionsScreenView from './QuestionsScreenView';
 
 const mapStateToProps = state => ({
   isLoading: questionsSelectors.getQuestionsLoadingState(state),
   isLoadingMore: questionsSelectors.getQuestionsLoadingMoreState(state),
   isRefreshing: questionsSelectors.getQuestionsRefreshingState(state),
-  questions: questionsSelectors.getQuestionsListState(state),
+  questions: questionsSelectors.getQuestionsState(state),
 });
 
 const mapDispatchToProps = {
@@ -32,6 +34,9 @@ const enhancer = compose(
   })),
 
   withHandlers({
+    navigateToQuestion: props => id =>
+      onNavigate(props.navigation, screens.Question, { id }),
+
     getQuestionsMore: props => async () => {
       try {
         await props.getQuestionsMore();
@@ -39,6 +44,7 @@ const enhancer = compose(
         AlertService.showErrorAlert(err.message);
       }
     },
+
     onRefreshQuestions: props => async () => {
       try {
         await props.getQuestions(true);

@@ -64,11 +64,21 @@ const colors = {
     tagColor: white,
   },
 
+  votes: {
+    button: '#c5c5c5',
+    buttonActive: accent,
+    count: accent,
+  },
+
   signUpScreen: {
     background: whiteSmoke,
   },
 
   questionsScreen: {
+    background: whiteSmoke,
+  },
+
+  questionScreen: {
     background: whiteSmoke,
   },
 

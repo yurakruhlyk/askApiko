@@ -1,23 +1,32 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 import T from 'prop-types';
-import { DrawerButton, Logo } from '../../components';
+import { Logo } from '../../components';
+import { QuestionDetail, AnswersList } from './components';
 import { headerStyles } from '../../styles';
 import s from './styles';
 
-const QuestionsScreenView = () => (
-  <View>
-    <Text>Question Page</Text>
+const QuestionScreenView = ({ question, answers, answersCount }) => (
+  <View style={s.root}>
+    <QuestionDetail
+      title={question.title}
+      description={question.description}
+      createdAt={question.createdAt}
+      tags={question.tags}
+    />
+    {/*<AnswersList count={answersCount} answers={answers} />*/}
   </View>
 );
-QuestionsScreenView.propTypes = {
+QuestionScreenView.propTypes = {
+  question: T.object,
+  answers: T.array,
+  answersCount: T.number,
 };
 
-QuestionsScreenView.navigationOptions = ({ navigation }) => ({
+QuestionScreenView.navigationOptions = {
   headerTitle: <Logo header />,
-  headerLeft: <DrawerButton onPress={() => navigation.toggleDrawer()} />,
   headerRight: <View />,
   ...headerStyles,
-});
+};
 
-export default QuestionsScreenView;
+export default QuestionScreenView;

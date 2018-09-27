@@ -13,7 +13,6 @@ const styles = StyleSheet.create({
     marginRight: 6,
     paddingHorizontal: 5,
     paddingVertical: 2,
-    marginBottom: dimensions.indent,
   },
 });
 

@@ -12,9 +12,9 @@ const QuestionItem = ({
   title,
   tags,
   createdAt,
-  // onPress,
+  onPress,
 }) => (
-  <Touchable onPress={() => {}}>
+  <Touchable onPress={onPress}>
     <View style={s.container}>
       <View style={s.statusContainer}>
         <Text style={s.votes}>273</Text>
@@ -43,7 +43,7 @@ QuestionItem.propTypes = {
   title: T.string,
   tags: T.array,
   createdAt: T.string,
-  // onPress: T.func,
+  onPress: T.func,
 };
 
 export default pure(QuestionItem);
