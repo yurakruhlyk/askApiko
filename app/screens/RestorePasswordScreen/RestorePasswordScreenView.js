@@ -1,7 +1,12 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 import T from 'prop-types';
-import { Button, Input, KeyboardAvoidingView, PageTitle } from '../../components';
+import {
+  Button,
+  Input,
+  KeyboardAvoidingView,
+  PageTitle,
+} from '../../components';
 import { dimensions, globalStyles, headerStyles } from '../../styles';
 import s from './styles';
 

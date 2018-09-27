@@ -1,28 +1,57 @@
+import * as R from 'ramda';
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, FlatList, Text } from 'react-native';
 import T from 'prop-types';
-import { DrawerButton, Logo } from '../../components';
-import { globalStyles, headerStyles } from '../../styles';
+import {
+  DrawerButton,
+  Logo,
+  PageTitle,
+  Separator,
+  RootSpinner,
+  Spinner,
+  QuestionItem,
+} from '../../components';
+import { headerStyles } from '../../styles';
 import s from './styles';
 
 const QuestionsScreenView = ({
-  navigateToQuestion,
-  navigateToAuthorizedApp,
+  questions,
+  isLoading,
+  isLoadingMore,
+  isRefreshing,
+  getQuestionsMore,
+  onRefreshQuestions,
 }) => (
-  <View>
-    <Text style={globalStyles.withMarginBottom}>Questions Page</Text>
-    <Text style={globalStyles.withMarginBottom} onPress={navigateToQuestion}>
-      Click for go to Question screen
-    </Text>
-    <Text style={globalStyles.withMarginBottom} onPress={navigateToAuthorizedApp}>
-      Click for Sign In
-    </Text>
+  <View style={s.root}>
+    <PageTitle
+      title="User questions"
+      style={s.pageTitle}
+    />
+    <FlatList
+      data={questions}
+      keyExtractor={R.prop('_id')}
+      contentContainerStyle={R.isEmpty(questions) && s.containerCenter}
+      ItemSeparatorComponent={Separator}
+      renderItem={({ item }) => <QuestionItem {...item} />}
+      onEndReachedThreshold={0.7}
+      onEndReached={getQuestionsMore}
+      refreshing={isRefreshing}
+      onRefresh={onRefreshQuestions}
+      ListEmptyComponent={
+        isLoading ? <RootSpinner /> : <Text>Empty</Text>
+      }
+      ListFooterComponent={isLoadingMore && <Spinner />}
+    />
   </View>
 );
+
 QuestionsScreenView.propTypes = {
-  navigateToQuestion: T.func,
-  navigateToAuthorizedApp: T.func,
-  navigateToUnauthorizedApp: T.func,
+  questions: T.array,
+  isLoading: T.bool,
+  isLoadingMore: T.bool,
+  isRefreshing: T.bool,
+  getQuestionsMore: T.func,
+  onRefreshQuestions: T.func,
 };
 
 QuestionsScreenView.navigationOptions = ({ navigation }) => ({

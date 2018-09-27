@@ -14,7 +14,7 @@ class Api {
     return new Promise(res => setTimeout(res, 1000));
   }
 
-  signUp({ username, email, password }) {
+  signUp(username, email, password) {
     return axios.post(`${this._baseUrl}/auth/sign-up`, {
       email,
       password,
@@ -24,11 +24,15 @@ class Api {
     });
   }
 
-  signIn({ email, password }) {
+  signIn(email, password) {
     return axios.post(`${this._baseUrl}/auth/sign-in`, {
       email,
       password,
     });
+  }
+
+  getQuestions(limit = 10, skip = 0, search = '') {
+    return axios.get(`${this._baseUrl}/questions?limit=${limit}&skip=${skip}&search=${search}`);
   }
 }
 
