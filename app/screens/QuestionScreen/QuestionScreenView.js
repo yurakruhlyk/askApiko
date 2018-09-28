@@ -1,6 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
 import T from 'prop-types';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { Logo } from '../../components';
 import { QuestionDetail, AnswersList } from './components';
 import { headerStyles } from '../../styles';
@@ -11,8 +12,10 @@ const QuestionScreenView = ({
   answers,
   answersCount,
   isLoading,
+  isLoadingMore,
+  getAnswersMore,
 }) => (
-  <View style={s.root}>
+  <KeyboardAwareScrollView style={s.root}>
     <QuestionDetail
       title={question.title}
       description={question.description}
@@ -23,14 +26,18 @@ const QuestionScreenView = ({
       count={answersCount}
       answers={answers}
       isLoading={isLoading}
+      isLoadingMore={isLoadingMore}
+      getAnswersMore={getAnswersMore}
     />
-  </View>
+  </KeyboardAwareScrollView>
 );
 QuestionScreenView.propTypes = {
   question: T.object,
   answers: T.array,
   answersCount: T.number,
   isLoading: T.bool,
+  isLoadingMore: T.bool,
+  getAnswersMore: T.func,
 };
 
 QuestionScreenView.navigationOptions = {

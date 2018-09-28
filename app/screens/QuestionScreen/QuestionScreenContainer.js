@@ -2,8 +2,9 @@ import * as R from 'ramda';
 import {
   compose,
   hoistStatics,
-  lifecycle,
   withProps,
+  withHandlers,
+  lifecycle,
 } from 'recompose';
 import { connect } from 'react-redux';
 import { withNavParams } from '../../utils/enhancers';
@@ -14,6 +15,7 @@ import QuestionScreenView from './QuestionScreenView';
 
 const mapStateToProps = (state, props) => ({
   isLoading: answersSelectors.getAnswersLoadingState(state),
+  isLoadingMore: answersSelectors.getAnswersLoadingMoreState(state),
   question: questionsSelectors.getQuestionById(state, props.id),
   answers: answersSelectors.getAnswersByQuestionId(state, props.id),
   answersCount: answersSelectors.getCountAllAnswersByQuestionState(state),
@@ -21,6 +23,7 @@ const mapStateToProps = (state, props) => ({
 
 const mapDispatchToProps = {
   getAnswers: answersOperations.getAnswersByQuestionId,
+  getAnswersMore: answersOperations.getAnswersByQuestionIdMore,
 };
 const enhancer = compose(
   withNavParams(['id']),
@@ -30,6 +33,16 @@ const enhancer = compose(
   withProps(props => ({
     isLoading: props.isLoading && R.isEmpty(props.answers),
   })),
+
+  withHandlers({
+    getAnswersMore: props => async () => {
+      try {
+        props.getAnswersMore(props.id);
+      } catch (err) {
+        AlertService.showErrorAlert(err.message);
+      }
+    },
+  }),
 
   lifecycle({
     async componentDidMount() {

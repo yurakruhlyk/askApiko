@@ -29,10 +29,34 @@ const getCountAllAnswersByQuestionState = createSelector(
   state => state,
 );
 
+export const getAnswersCount = createSelector(
+  (state, id) => R.pathOr([], ['answers', 'answersIds', id])(state),
+  ids => ids.length,
+);
+
+const getAnswersLoadingMoreState = createSelector(
+  R.path(['answers', 'isAnswersLoadingMore']),
+  state => state,
+);
+
+const getAnswersLoadingMoreErrorState = createSelector(
+  R.path(['answers', 'isAnswersLoadingMoreError']),
+  state => state,
+);
+
+const getAnswersHasNoMoreState = createSelector(
+  R.path(['answers', 'isAnswersHasNoMore']),
+  state => state,
+);
+
 export default {
   getAnswersLoadingState,
   getAnswersLoadingErrorState,
   getAnswersIdsByQuestionId,
   getAnswersByQuestionId,
   getCountAllAnswersByQuestionState,
+  getAnswersCount,
+  getAnswersLoadingMoreState,
+  getAnswersLoadingMoreErrorState,
+  getAnswersHasNoMoreState,
 };

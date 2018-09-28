@@ -7,6 +7,10 @@ const INITIAL_STATE = {
   isAnswersLoadingError: null,
   countAllAnswersByQuestion: 0,
 
+  isAnswersLoadingMore: false,
+  isAnswersLoadingMoreError: null,
+  isAnswersHasNoMore: false,
+
   answersIds: {},
   answersEntities: {},
 };
@@ -19,6 +23,7 @@ export default handleActions(
     [types.GET_ANSWERS_BY_QUESTION_ID_SUCCESS]: mergeDeep(({ payload }) => ({
       isAnswersLoading: false,
       isAnswersLoadingError: null,
+      isAnswersHasNoMore: false,
       countAllAnswersByQuestion: payload.countAllAnswersByQuestion,
 
       answersIds: { [payload.id]: payload.answersIds },
@@ -28,6 +33,23 @@ export default handleActions(
       isAnswersLoading: false,
       isAnswersLoadingError: payload,
     })),
+
+    [types.GET_ANSWERS_BY_QUESTION_ID_MORE_START]: mergeDeep({
+      isAnswersLoadingMore: true,
+    }),
+    [types.GET_ANSWERS_BY_QUESTION_ID_MORE_SUCCESS]: mergeDeep(({ payload }, state) => ({
+      isAnswersLoadingMore: false,
+      isAnswersLoadingMoreError: null,
+
+      answersIds: { [payload.id]: [...state.answersIds[payload.id], ...payload.answersIds] },
+      answersEntities: payload.answersEntities,
+      isAnswersHasNoMore: payload.hasNoMore,
+    })),
+    [types.GET_ANSWERS_BY_QUESTION_ID_MORE_ERROR]: mergeDeep(({ payload }) => ({
+      isAnswersLoadingMore: false,
+      isAnswersLoadingMoreError: payload,
+    })),
+
   },
   INITIAL_STATE,
 );
