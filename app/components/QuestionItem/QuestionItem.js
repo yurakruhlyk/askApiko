@@ -39,7 +39,6 @@ const QuestionItem = ({
 );
 
 QuestionItem.propTypes = {
-  _id: T.string,
   title: T.string,
   tags: T.array,
   createdAt: T.string,
