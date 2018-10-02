@@ -1,9 +1,23 @@
+import * as R from 'ramda';
 import React from 'react';
-import { View } from 'react-native';
+import {
+  FlatList,
+  Text,
+  View,
+} from 'react-native';
 import T from 'prop-types';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { Logo } from '../../components';
-import { QuestionDetail, AnswersList } from './components';
+import {
+  Logo,
+  RootSpinner,
+  Separator,
+  Spinner,
+} from '../../components';
+import {
+  QuestionDetail,
+  AnswersListHeader,
+  AnswerItem,
+  AnswersListFooter,
+} from './components';
 import { headerStyles } from '../../styles';
 import s from './styles';
 
@@ -11,33 +25,58 @@ const QuestionScreenView = ({
   question,
   answers,
   answersCount,
+  isAuthorized,
   isLoading,
   isLoadingMore,
   getAnswersMore,
+  navigateToSignUp,
 }) => (
-  <KeyboardAwareScrollView style={s.root}>
-    <QuestionDetail
-      title={question.title}
-      description={question.description}
-      createdAt={question.createdAt}
-      tags={question.tags}
+  <View style={s.root}>
+    <FlatList
+      data={answers}
+      keyExtractor={R.prop('_id')}
+      contentContainerStyle={[
+        R.isEmpty(answers) && s.containerCenter,
+      ]}
+      ItemSeparatorComponent={Separator}
+      renderItem={({ item }) =>
+        <AnswerItem {...item} />
+      }
+      onEndReachedThreshold={0.7}
+      onEndReached={getAnswersMore}
+      ListHeaderComponent={
+        <View>
+          <QuestionDetail
+            title={question.title}
+            description={question.description}
+            createdAt={question.createdAt}
+            tags={question.tags}
+          />
+          <AnswersListHeader count={answersCount} />
+        </View>
+      }
+      ListEmptyComponent={
+        isLoading ? <RootSpinner /> : <Text>Empty</Text>
+      }
+      ListFooterComponent={
+        isLoadingMore &&
+        <View style={s.spinnerContainer}>
+          <Spinner />
+        </View>
+      }
     />
-    <AnswersList
-      count={answersCount}
-      answers={answers}
-      isLoading={isLoading}
-      isLoadingMore={isLoadingMore}
-      getAnswersMore={getAnswersMore}
-    />
-  </KeyboardAwareScrollView>
+    <AnswersListFooter isAuthorized={isAuthorized} navigateToSignUp={navigateToSignUp} />
+  </View>
 );
 QuestionScreenView.propTypes = {
   question: T.object,
   answers: T.array,
   answersCount: T.number,
+  isAuthorized: T.bool,
   isLoading: T.bool,
   isLoadingMore: T.bool,
   getAnswersMore: T.func,
+  navigateToSignUp: T.func,
 };
 
 QuestionScreenView.navigationOptions = {

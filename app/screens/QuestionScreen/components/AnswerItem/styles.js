@@ -9,8 +9,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.answerItem.controllerPanel,
     alignItems: 'center',
     paddingVertical: 10,
-    paddingLeft: 15,
-    paddingRight: 20,
+    paddingHorizontal: 15,
   },
   messageContainer: {
     backgroundColor: colors.answerItem.messageContainer,

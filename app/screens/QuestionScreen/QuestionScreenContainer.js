@@ -10,10 +10,13 @@ import { connect } from 'react-redux';
 import { withNavParams } from '../../utils/enhancers';
 import { questionsSelectors } from '../../modules/questions';
 import { answersSelectors, answersOperations } from '../../modules/answers';
+import { authSelectors } from '../../modules/auth';
 import { AlertService } from '../../services';
+import screens from '../../constants/screens';
 import QuestionScreenView from './QuestionScreenView';
 
 const mapStateToProps = (state, props) => ({
+  isAuthorized: authSelectors.getSignedInState(state),
   isLoading: answersSelectors.getAnswersLoadingState(state),
   isLoadingMore: answersSelectors.getAnswersLoadingMoreState(state),
   question: questionsSelectors.getQuestionById(state, props.id),
@@ -42,6 +45,8 @@ const enhancer = compose(
         AlertService.showErrorAlert(err.message);
       }
     },
+
+    navigateToSignUp: props => () => props.navigation.navigate(screens.SignUp),
   }),
 
   lifecycle({
