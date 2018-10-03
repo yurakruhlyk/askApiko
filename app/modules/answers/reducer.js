@@ -11,8 +11,12 @@ const INITIAL_STATE = {
   isAnswersLoadingMoreError: null,
   isAnswersHasNoMore: false,
 
-  answersIds: {},
-  answersEntities: {},
+  answersIds: {
+    // questionId: [answersIds]
+  },
+  answersEntities: {
+    // answerId: answerData
+  },
 };
 
 export default handleActions(
@@ -26,7 +30,7 @@ export default handleActions(
       isAnswersHasNoMore: false,
       countAllAnswersByQuestion: payload.countAllAnswersByQuestion,
 
-      answersIds: { [payload.id]: payload.answersIds },
+      answersIds: { [payload.questionId]: payload.answersIds },
       answersEntities: payload.answersEntities,
     })),
     [types.GET_ANSWERS_BY_QUESTION_ID_ERROR]: mergeDeep(({ payload }) => ({
@@ -41,7 +45,12 @@ export default handleActions(
       isAnswersLoadingMore: false,
       isAnswersLoadingMoreError: null,
 
-      answersIds: { [payload.id]: [...state.answersIds[payload.id], ...payload.answersIds] },
+      answersIds: {
+        [payload.questionId]: [
+          ...state.answersIds[payload.questionId],
+          ...payload.answersIds,
+        ],
+      },
       answersEntities: payload.answersEntities,
       isAnswersHasNoMore: payload.hasNoMore,
     })),
@@ -50,6 +59,29 @@ export default handleActions(
       isAnswersLoadingMoreError: payload,
     })),
 
+    [types.SEND_ANSWER_TO_QUESTION_START]: mergeDeep(({ payload }, state) => ({
+      answersIds: {
+        [payload.questionId]: [
+          ...state.answersIds[payload.questionId],
+          payload.answerId,
+        ],
+      },
+      answersEntities: payload.answer,
+    })),
+    [types.SEND_ANSWER_TO_QUESTION_SUCCESS]: mergeDeep(({ payload }) => ({
+      answersEntities: {
+        [payload.answerId]: {
+          isLoading: false,
+        },
+      },
+    })),
+    [types.SEND_ANSWER_TO_QUESTION_ERROR]: mergeDeep(({ payload }) => ({
+      answersEntities: {
+        [payload.answerId]: {
+          isError: true,
+        },
+      },
+    })),
   },
   INITIAL_STATE,
 );

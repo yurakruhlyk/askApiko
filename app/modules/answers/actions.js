@@ -14,3 +14,7 @@ export const getAnswersByQuestionIdMoreSuccess = createAction(
 export const getAnswersByQuestionIdMoreError = createAction(
   types.GET_ANSWERS_BY_QUESTION_ID_MORE_ERROR,
 );
+
+export const sendAnswerToQuestionStart = createAction(types.SEND_ANSWER_TO_QUESTION_START);
+export const sendAnswerToQuestionSuccess = createAction(types.SEND_ANSWER_TO_QUESTION_SUCCESS);
+export const sendAnswerToQuestionError = createAction(types.SEND_ANSWER_TO_QUESTION_ERROR);

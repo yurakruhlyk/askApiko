@@ -45,7 +45,8 @@
     "redux-actions": "^2.6.1",
     "redux-thunk": "^2.3.0",
     "reselect": "^3.0.1",
-    "socket.io-client": "^2.1.1"
+    "socket.io-client": "^2.1.1",
+    "uuid": "^3.3.2"
   },
   "devDependencies": {
     "eslint": "^4.17.0",

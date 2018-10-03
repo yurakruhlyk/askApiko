@@ -4,7 +4,12 @@ import T from 'prop-types';
 import { Button, Input } from '../../../../components';
 import s from './styles';
 
-const AnswersListFooter = ({ isAuthorized, navigateToSignUp }) => (
+const AnswersListFooter = ({
+  isAuthorized,
+  navigateToSignUp,
+  onChangeMessage,
+  sendAnswerToQuestion,
+}) => (
   <KeyboardAvoidingView behavior="position" keyboardVerticalOffset={64}>
     <View style={s.footer}>
       {
@@ -14,10 +19,14 @@ const AnswersListFooter = ({ isAuthorized, navigateToSignUp }) => (
               <Input
                 placeholder="Type your answer here…"
                 style={s.input}
+                onChange={onChangeMessage}
                 multiline
               />
               <View style={s.buttonContainer}>
-                <Button title="Submit Answer" />
+                <Button
+                  title="Submit Answer"
+                  onPress={sendAnswerToQuestion}
+                />
               </View>
             </View>
           :
@@ -37,6 +46,8 @@ const AnswersListFooter = ({ isAuthorized, navigateToSignUp }) => (
 AnswersListFooter.propTypes = {
   isAuthorized: T.bool,
   navigateToSignUp: T.func,
+  onChangeMessage: T.func,
+  sendAnswerToQuestion: T.func,
 };
 
 export default AnswersListFooter;

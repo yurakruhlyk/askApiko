@@ -38,6 +38,14 @@ class Api {
   getAnswersByQuestionId(id, limit = 5, skip = 0) {
     return axios.get(`${this._baseUrl}/questions/${id}/answers?limit=${limit}&skip=${skip}`);
   }
+
+  sendAnswerToQuestion(id, message) {
+    return axios.post(`${this._baseUrl}/answers/`, {
+      title: ' ', // need for server
+      description: message,
+      questionId: id,
+    });
+  }
 }
 
 const api = new Api(BASE_URL);

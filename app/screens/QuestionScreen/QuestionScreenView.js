@@ -30,6 +30,8 @@ const QuestionScreenView = ({
   isLoadingMore,
   getAnswersMore,
   navigateToSignUp,
+  onChangeMessage,
+  sendAnswerToQuestion,
 }) => (
   <View style={s.root}>
     <FlatList
@@ -65,7 +67,12 @@ const QuestionScreenView = ({
         </View>
       }
     />
-    <AnswersListFooter isAuthorized={isAuthorized} navigateToSignUp={navigateToSignUp} />
+    <AnswersListFooter
+      isAuthorized={isAuthorized}
+      navigateToSignUp={navigateToSignUp}
+      sendAnswerToQuestion={sendAnswerToQuestion}
+      onChangeMessage={onChangeMessage}
+    />
   </View>
 );
 QuestionScreenView.propTypes = {
@@ -77,6 +84,8 @@ QuestionScreenView.propTypes = {
   isLoadingMore: T.bool,
   getAnswersMore: T.func,
   navigateToSignUp: T.func,
+  onChangeMessage: T.func,
+  sendAnswerToQuestion: T.func,
 };
 
 QuestionScreenView.navigationOptions = {

@@ -12,6 +12,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
   },
   messageContainer: {
+    // opacity: 0.2,
     backgroundColor: colors.answerItem.messageContainer,
     flex: 1,
     paddingVertical: 10,

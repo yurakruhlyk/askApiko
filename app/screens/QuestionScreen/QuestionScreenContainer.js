@@ -2,6 +2,7 @@ import * as R from 'ramda';
 import {
   compose,
   hoistStatics,
+  withStateHandlers,
   withProps,
   withHandlers,
   lifecycle,
@@ -27,11 +28,18 @@ const mapStateToProps = (state, props) => ({
 const mapDispatchToProps = {
   getAnswers: answersOperations.getAnswersByQuestionId,
   getAnswersMore: answersOperations.getAnswersByQuestionIdMore,
+  sendAnswerToQuestion: answersOperations.sendAnswerToQuestion,
 };
 const enhancer = compose(
   withNavParams(['id']),
 
   connect(mapStateToProps, mapDispatchToProps),
+
+  withStateHandlers(
+    { message: '' },
+    {
+      onChangeMessage: () => (message) => ({ message }),
+    }),
 
   withProps(props => ({
     isLoading: props.isLoading && R.isEmpty(props.answers),
@@ -42,6 +50,15 @@ const enhancer = compose(
       try {
         props.getAnswersMore(props.id);
       } catch (err) {
+        AlertService.showErrorAlert(err.message);
+      }
+    },
+
+    sendAnswerToQuestion: props => async () => {
+      try {
+        props.sendAnswerToQuestion(props.id, props.message);
+      } catch (err) {
+        console.log(err.message);
         AlertService.showErrorAlert(err.message);
       }
     },
