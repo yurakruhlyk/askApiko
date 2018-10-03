@@ -1,5 +1,6 @@
 import { handleActions } from 'redux-actions';
 import types from './types';
+import { appTypes } from '../app';
 import { mergeDeep } from '../../utils/stateHelpers';
 
 const INITIAL_STATE = {
@@ -14,6 +15,10 @@ const INITIAL_STATE = {
 
 export default handleActions(
   {
+    [appTypes.INITIALIZED]: mergeDeep({
+      signedIn: true,
+    }),
+
     [types.SIGN_UP_START]: mergeDeep({ isSigningUp: true }),
     [types.SIGN_UP_SUCCESS]: mergeDeep({
       isSigningUp: false,

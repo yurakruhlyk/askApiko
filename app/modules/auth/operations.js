@@ -10,6 +10,7 @@ import {
 
   signOut,
 } from './actions';
+import { userOperations } from '../user';
 import { authToken } from '../../utils/authToken';
 import { getErrMessage } from '../../utils/errorHelper';
 import { NavigationService } from '../../services';
@@ -41,6 +42,7 @@ const signIn = (email, password) => async (dispatch) => {
     await authToken.set(res.data.token);
 
     dispatch(signInSuccess());
+    dispatch(userOperations.setUser(res.data.user));
   } catch (err) {
     const errMessage = getErrMessage(err);
 
