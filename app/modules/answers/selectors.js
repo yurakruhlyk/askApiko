@@ -44,6 +44,11 @@ const getAnswersLoadingMoreErrorState = createSelector(
   state => state,
 );
 
+const getAnswersRefreshingState = createSelector(
+  R.path(['answers', 'isAnswersRefreshing']),
+  state => state,
+);
+
 const getAnswersHasNoMoreState = createSelector(
   R.path(['answers', 'isAnswersHasNoMore']),
   state => state,
@@ -59,4 +64,5 @@ export default {
   getAnswersLoadingMoreState,
   getAnswersLoadingMoreErrorState,
   getAnswersHasNoMoreState,
+  getAnswersRefreshingState,
 };

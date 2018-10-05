@@ -6,6 +6,7 @@ import {
   withProps,
   withHandlers,
   lifecycle,
+  pure,
 } from 'recompose';
 import { connect } from 'react-redux';
 import { withNavParams } from '../../utils/enhancers';
@@ -19,6 +20,7 @@ import QuestionScreenView from './QuestionScreenView';
 const mapStateToProps = (state, props) => ({
   isAuthorized: authSelectors.getSignedInState(state),
   isLoading: answersSelectors.getAnswersLoadingState(state),
+  isRefreshing: answersSelectors.getAnswersRefreshingState(state),
   isLoadingMore: answersSelectors.getAnswersLoadingMoreState(state),
   question: questionsSelectors.getQuestionById(state, props.id),
   answers: answersSelectors.getAnswersByQuestionId(state, props.id),
@@ -48,7 +50,7 @@ const enhancer = compose(
   withHandlers({
     getAnswersMore: props => async () => {
       try {
-        props.getAnswersMore(props.id);
+        await props.getAnswersMore(props.id);
       } catch (err) {
         AlertService.showErrorAlert(err.message);
       }
@@ -56,7 +58,8 @@ const enhancer = compose(
 
     sendAnswerToQuestion: props => async () => {
       try {
-        props.sendAnswerToQuestion(props.id, props.message);
+        await props.sendAnswerToQuestion(props.id, props.message);
+        props.onChangeMessage('');
       } catch (err) {
         console.log(err.message);
         AlertService.showErrorAlert(err.message);
@@ -64,17 +67,27 @@ const enhancer = compose(
     },
 
     navigateToSignUp: props => () => props.navigation.navigate(screens.SignUp),
-  }),
 
-  lifecycle({
-    async componentDidMount() {
+    onRefreshAnswers: props => async () => {
       try {
-        this.props.getAnswers(this.props.id);
+        await props.getAnswers(props.id, true);
       } catch (err) {
         AlertService.showErrorAlert(err.message);
       }
     },
   }),
+
+  lifecycle({
+    async componentDidMount() {
+      try {
+        await this.props.getAnswers(this.props.id);
+      } catch (err) {
+        AlertService.showErrorAlert(err.message);
+      }
+    },
+  }),
+
+  pure,
 );
 
 export default hoistStatics(enhancer)(QuestionScreenView);

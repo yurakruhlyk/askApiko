@@ -31,7 +31,10 @@ const QuestionScreenView = ({
   getAnswersMore,
   navigateToSignUp,
   onChangeMessage,
+  message,
   sendAnswerToQuestion,
+  isRefreshing,
+  onRefreshAnswers,
 }) => (
   <View style={s.root}>
     <FlatList
@@ -46,6 +49,8 @@ const QuestionScreenView = ({
       }
       onEndReachedThreshold={0.7}
       onEndReached={getAnswersMore}
+      refreshing={isRefreshing}
+      onRefresh={onRefreshAnswers}
       ListHeaderComponent={
         <View>
           <QuestionDetail
@@ -58,7 +63,9 @@ const QuestionScreenView = ({
         </View>
       }
       ListEmptyComponent={
-        isLoading ? <RootSpinner /> : <Text>Empty</Text>
+        isLoading
+          ? <RootSpinner />
+          : <Text>Empty</Text>
       }
       ListFooterComponent={
         isLoadingMore &&
@@ -72,6 +79,7 @@ const QuestionScreenView = ({
       navigateToSignUp={navigateToSignUp}
       sendAnswerToQuestion={sendAnswerToQuestion}
       onChangeMessage={onChangeMessage}
+      message={message}
     />
   </View>
 );
@@ -85,6 +93,7 @@ QuestionScreenView.propTypes = {
   getAnswersMore: T.func,
   navigateToSignUp: T.func,
   onChangeMessage: T.func,
+  message: T.string,
   sendAnswerToQuestion: T.func,
 };
 

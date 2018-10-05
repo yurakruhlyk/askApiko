@@ -8,6 +8,7 @@ const AnswersListFooter = ({
   isAuthorized,
   navigateToSignUp,
   onChangeMessage,
+  message,
   sendAnswerToQuestion,
 }) => (
   <KeyboardAvoidingView behavior="position" keyboardVerticalOffset={64}>
@@ -20,6 +21,7 @@ const AnswersListFooter = ({
                 placeholder="Type your answer here…"
                 style={s.input}
                 onChange={onChangeMessage}
+                value={message}
                 multiline
               />
               <View style={s.buttonContainer}>
@@ -47,6 +49,7 @@ AnswersListFooter.propTypes = {
   isAuthorized: T.bool,
   navigateToSignUp: T.func,
   onChangeMessage: T.func,
+  message: T.string,
   sendAnswerToQuestion: T.func,
 };
 
