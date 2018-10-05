@@ -51,10 +51,10 @@ export default handleActions(
       isAnswersLoadingMoreError: null,
 
       answersIds: {
-        [payload.questionId]: [
+        [payload.questionId]: R.uniq([
           ...state.answersIds[payload.questionId],
           ...payload.answersIds,
-        ],
+        ]),
       },
       answersEntities: payload.answersEntities,
       isAnswersHasNoMore: payload.hasNoMore,
