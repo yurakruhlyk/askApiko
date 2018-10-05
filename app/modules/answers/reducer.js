@@ -1,3 +1,4 @@
+import R from 'ramda';
 import { handleActions } from 'redux-actions';
 import types from './types';
 import { mergeDeep } from '../../utils/stateHelpers';
@@ -15,7 +16,7 @@ const INITIAL_STATE = {
     // questionId: [answersIds]
   },
   answersEntities: {
-    // answerId: answerData
+    // answerId: {answerData}
   },
 };
 
@@ -66,18 +67,25 @@ export default handleActions(
           payload.answerId,
         ],
       },
+
       answersEntities: payload.answer,
     })),
-    [types.SEND_ANSWER_TO_QUESTION_SUCCESS]: mergeDeep(({ payload }) => ({
-      answersEntities: {
-        [payload.answerId]: {
-          isLoading: false,
-        },
+    [types.SEND_ANSWER_TO_QUESTION_SUCCESS]: mergeDeep(({ payload }, state) => ({
+      answersIds: {
+        [payload.questionId]: R.without(
+          [payload.answerId],
+          [
+            ...state.answersIds[payload.questionId],
+            payload.answer._id,
+          ],
+        ),
       },
+      answersEntities: { [payload.answer._id]: payload.answer },
     })),
     [types.SEND_ANSWER_TO_QUESTION_ERROR]: mergeDeep(({ payload }) => ({
       answersEntities: {
         [payload.answerId]: {
+          isLoading: false,
           isError: true,
         },
       },

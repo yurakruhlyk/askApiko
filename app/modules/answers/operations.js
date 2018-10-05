@@ -69,22 +69,6 @@ const sendAnswerToQuestion = (questionId, message) => async dispatch => {
   const date = new Date().toISOString();
 
   try {
-    // console.log({
-    //   questionId,
-    //   answerId,
-    //   answerEntity: {
-    //     [answerId]: {
-    //       createdAt: date,
-    //       _id: answerId,
-    //       createdBy: 'userId',
-    //       description: message,
-    //       questionId,
-    //       isLoading: true,
-    //       isError: null,
-    //     },
-    //   },
-    // });
-
     dispatch(sendAnswerToQuestionStart({
       questionId,
       answerId,
@@ -92,7 +76,7 @@ const sendAnswerToQuestion = (questionId, message) => async dispatch => {
         [answerId]: {
           createdAt: date,
           _id: answerId,
-          createdBy: 'userId', // TODO fix
+          createdBy: '1', // TODO fix after add user to Redux
           description: message,
           questionId,
           isLoading: true,
@@ -101,9 +85,10 @@ const sendAnswerToQuestion = (questionId, message) => async dispatch => {
       },
     }));
 
-    await Api.sendAnswerToQuestion(questionId, message);
+    const res = await Api.sendAnswerToQuestion(questionId, message);
+    const { answer } = res.data;
 
-    dispatch(sendAnswerToQuestionSuccess({ answerId }));
+    dispatch(sendAnswerToQuestionSuccess({ questionId, answerId, answer }));
   } catch (err) {
     const errMessage = getErrMessage(err);
 

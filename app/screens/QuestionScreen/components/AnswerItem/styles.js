@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { colors } from '../../../../styles';
+import { colors, fontSizes } from '../../../../styles';
 
 const styles = StyleSheet.create({
   topContainer: {
@@ -12,14 +12,25 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
   },
   messageContainer: {
-    // opacity: 0.2,
     backgroundColor: colors.answerItem.messageContainer,
     flex: 1,
     paddingVertical: 10,
     paddingHorizontal: 15,
   },
   messageText: {
-    fontSize: 14,
+    fontSize: fontSizes.smallest,
+  },
+  opacity: {
+    opacity: 0.2,
+  },
+  status: {
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
 

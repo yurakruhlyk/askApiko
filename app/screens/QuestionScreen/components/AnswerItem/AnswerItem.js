@@ -3,26 +3,58 @@ import { View, Text } from 'react-native';
 import T from 'prop-types';
 import { pure } from 'recompose';
 import { Ionicons } from '@expo/vector-icons';
-import { Touchable } from '../../../../components';
+import { RootSpinner, Touchable } from '../../../../components';
 import { AuthorDetail, Votes } from '../../components';
 import { colors } from '../../../../styles';
 import s from './styles';
 
-const AnswerItem = ({ description, createdAt }) => (
+const AnswerItem = ({
+  description,
+  createdAt,
+  isLoading,
+  isError,
+}) => (
   <View>
     <View style={s.topContainer}>
       <View style={s.controllerPanel}>
-        <Votes negative count={51} />
-        <View>
+        <View style={[
+          isLoading && s.opacity,
+          isError && s.opacity,
+        ]}
+        >
+          <Votes negative count={51} />
+          <View>
+            <Touchable useOpacity borderless onPress={() => {}}>
+              <View>
+                <Ionicons
+                  color={colors.answerItem.icon}
+                  size={28}
+                  name="md-checkmark-circle-outline"
+                />
+              </View>
+            </Touchable>
+          </View>
+        </View>
+        <View style={s.status}>
+
+          {
+            isLoading
+          &&
+          <RootSpinner />
+        }
+
+          {
+            isError
+          &&
           <Touchable useOpacity borderless onPress={() => {}}>
-            <View>
-              <Ionicons
-                color={colors.answerItem.icon}
-                size={28}
-                name="md-checkmark-circle-outline"
-              />
-            </View>
+            <Ionicons
+              color={colors.accent}
+              size={32}
+              name="md-refresh"
+            />
           </Touchable>
+        }
+
         </View>
       </View>
       <View style={s.messageContainer}>
@@ -38,6 +70,8 @@ const AnswerItem = ({ description, createdAt }) => (
 AnswerItem.propTypes = {
   description: T.string,
   createdAt: T.string,
+  isLoading: T.bool,
+  isError: T.bool,
 };
 
 export default pure(AnswerItem);
