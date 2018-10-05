@@ -35,6 +35,7 @@ const QuestionScreenView = ({
   sendAnswerToQuestion,
   isRefreshing,
   onRefreshAnswers,
+  isValidMessage,
 }) => (
   <View style={s.root}>
     <FlatList
@@ -80,6 +81,7 @@ const QuestionScreenView = ({
       sendAnswerToQuestion={sendAnswerToQuestion}
       onChangeMessage={onChangeMessage}
       message={message}
+      isValidMessage={isValidMessage}
     />
   </View>
 );
@@ -95,6 +97,7 @@ QuestionScreenView.propTypes = {
   onChangeMessage: T.func,
   message: T.string,
   sendAnswerToQuestion: T.func,
+  isValidMessage: T.bool,
 };
 
 QuestionScreenView.navigationOptions = {

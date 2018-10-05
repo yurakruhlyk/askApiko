@@ -10,6 +10,7 @@ const AnswersListFooter = ({
   onChangeMessage,
   message,
   sendAnswerToQuestion,
+  isValidMessage,
 }) => (
   <KeyboardAvoidingView behavior="position" keyboardVerticalOffset={64}>
     <View style={s.footer}>
@@ -28,6 +29,7 @@ const AnswersListFooter = ({
                 <Button
                   title="Submit Answer"
                   onPress={sendAnswerToQuestion}
+                  disabled={!isValidMessage}
                 />
               </View>
             </View>
@@ -51,6 +53,7 @@ AnswersListFooter.propTypes = {
   onChangeMessage: T.func,
   message: T.string,
   sendAnswerToQuestion: T.func,
+  isValidMessage: T.bool,
 };
 
 export default AnswersListFooter;

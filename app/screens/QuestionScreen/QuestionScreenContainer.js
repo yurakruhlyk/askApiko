@@ -5,6 +5,7 @@ import {
   withStateHandlers,
   withProps,
   withHandlers,
+  withPropsOnChange,
   lifecycle,
   pure,
 } from 'recompose';
@@ -15,6 +16,7 @@ import { answersSelectors, answersOperations } from '../../modules/answers';
 import { authSelectors } from '../../modules/auth';
 import { AlertService } from '../../services';
 import screens from '../../constants/screens';
+import { trim } from '../../utils/textValidationHelper';
 import QuestionScreenView from './QuestionScreenView';
 
 const mapStateToProps = (state, props) => ({
@@ -38,14 +40,21 @@ const enhancer = compose(
   connect(mapStateToProps, mapDispatchToProps),
 
   withStateHandlers(
-    { message: '' },
     {
-      onChangeMessage: () => (message) => ({ message }),
+      message: '',
+      isValidMessage: false,
+    },
+    {
+      onChange: () => (field, value) => ({ [field]: value }),
     }),
 
   withProps(props => ({
     isLoading: props.isLoading && R.isEmpty(props.answers),
   })),
+
+  withHandlers({
+    onChangeMessage: props => (message) => props.onChange('message', message),
+  }),
 
   withHandlers({
     getAnswersMore: props => async () => {
@@ -77,6 +86,15 @@ const enhancer = compose(
     },
   }),
 
+  withPropsOnChange(
+    ['message'],
+    ({ message, onChange }) => {
+      const isValidMessage = trim(message).length > 0;
+
+      onChange('isValidMessage', isValidMessage);
+    }
+  ),
+
   lifecycle({
     async componentDidMount() {
       try {
@@ -87,7 +105,7 @@ const enhancer = compose(
     },
   }),
 
-  pure,
+  pure
 );
 
 export default hoistStatics(enhancer)(QuestionScreenView);
