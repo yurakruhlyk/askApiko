@@ -17,22 +17,33 @@ import { answersSelectors } from './';
 import { normalize } from '../../utils/stateHelper';
 import { getErrMessage } from '../../utils/errorHelper';
 
-const getAnswersByQuestionId = questionId => async dispatch => {
-  try {
-    dispatch(getAnswersByQuestionIdStart());
+const getAnswersByQuestionId = (questionId, refreshing = false) =>
+  async (dispatch, getState) => {
+    try {
+      const hasAnswers = answersSelectors.getAnswersCount(getState(), questionId);
 
-    const res = await Api.getAnswersByQuestionId(questionId);
-    const payload = normalize(res.data.answers, 'answersIds', 'answersEntities');
-    const countAllAnswersByQuestion = res.data.count;
+      if (hasAnswers && !refreshing) {
+        return;
+      }
 
-    dispatch(getAnswersByQuestionIdSuccess({ ...payload, questionId, countAllAnswersByQuestion }));
-  } catch (err) {
-    const errMessage = getErrMessage(err);
+      dispatch(getAnswersByQuestionIdStart(refreshing));
 
-    dispatch(getAnswersByQuestionIdError(errMessage));
-    throw new Error(errMessage);
-  }
-};
+      const res = await Api.getAnswersByQuestionId(questionId);
+      const payload = normalize(res.data.answers, 'answersIds', 'answersEntities');
+      const countAllAnswersByQuestion = res.data.count;
+
+      dispatch(getAnswersByQuestionIdSuccess({
+        ...payload,
+        questionId,
+        countAllAnswersByQuestion,
+      }));
+    } catch (err) {
+      const errMessage = getErrMessage(err);
+
+      dispatch(getAnswersByQuestionIdError(errMessage));
+      throw new Error(errMessage);
+    }
+  };
 
 const getAnswersByQuestionIdMore = questionId => async (dispatch, getState) => {
   try {

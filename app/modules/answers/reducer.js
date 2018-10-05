@@ -10,6 +10,8 @@ const INITIAL_STATE = {
 
   isAnswersLoadingMore: false,
   isAnswersLoadingMoreError: null,
+
+  isAnswersRefreshing: false,
   isAnswersHasNoMore: false,
 
   answersIds: {
@@ -22,13 +24,15 @@ const INITIAL_STATE = {
 
 export default handleActions(
   {
-    [types.GET_ANSWERS_BY_QUESTION_ID_START]: mergeDeep({
+    [types.GET_ANSWERS_BY_QUESTION_ID_START]: mergeDeep(({ payload }) => ({
       isAnswersLoading: true,
-    }),
+      isAnswersRefreshing: payload,
+    })),
     [types.GET_ANSWERS_BY_QUESTION_ID_SUCCESS]: mergeDeep(({ payload }) => ({
       isAnswersLoading: false,
       isAnswersLoadingError: null,
       isAnswersHasNoMore: false,
+      isAnswersRefreshing: false,
       countAllAnswersByQuestion: payload.countAllAnswersByQuestion,
 
       answersIds: { [payload.questionId]: payload.answersIds },

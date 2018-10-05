@@ -6,6 +6,7 @@ import {
   withProps,
   withHandlers,
   lifecycle,
+  pure,
 } from 'recompose';
 import { connect } from 'react-redux';
 import { withNavParams } from '../../utils/enhancers';
@@ -19,6 +20,7 @@ import QuestionScreenView from './QuestionScreenView';
 const mapStateToProps = (state, props) => ({
   isAuthorized: authSelectors.getSignedInState(state),
   isLoading: answersSelectors.getAnswersLoadingState(state),
+  isRefreshing: answersSelectors.getAnswersRefreshingState(state),
   isLoadingMore: answersSelectors.getAnswersLoadingMoreState(state),
   question: questionsSelectors.getQuestionById(state, props.id),
   answers: answersSelectors.getAnswersByQuestionId(state, props.id),
@@ -64,6 +66,14 @@ const enhancer = compose(
     },
 
     navigateToSignUp: props => () => props.navigation.navigate(screens.SignUp),
+
+    onRefreshAnswers: props => async () => {
+      try {
+        await props.getAnswers(props.id, true);
+      } catch (err) {
+        AlertService.showErrorAlert(err.message);
+      }
+    },
   }),
 
   lifecycle({
@@ -75,6 +85,8 @@ const enhancer = compose(
       }
     },
   }),
+
+  pure,
 );
 
 export default hoistStatics(enhancer)(QuestionScreenView);

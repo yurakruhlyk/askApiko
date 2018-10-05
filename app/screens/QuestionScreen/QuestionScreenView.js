@@ -32,6 +32,8 @@ const QuestionScreenView = ({
   navigateToSignUp,
   onChangeMessage,
   sendAnswerToQuestion,
+  isRefreshing,
+  onRefreshAnswers,
 }) => (
   <View style={s.root}>
     <FlatList
@@ -46,6 +48,8 @@ const QuestionScreenView = ({
       }
       onEndReachedThreshold={0.7}
       onEndReached={getAnswersMore}
+      refreshing={isRefreshing}
+      onRefresh={onRefreshAnswers}
       ListHeaderComponent={
         <View>
           <QuestionDetail
@@ -58,7 +62,9 @@ const QuestionScreenView = ({
         </View>
       }
       ListEmptyComponent={
-        isLoading ? <RootSpinner /> : <Text>Empty</Text>
+        isLoading
+          ? <RootSpinner />
+          : <Text>Empty</Text>
       }
       ListFooterComponent={
         isLoadingMore &&
