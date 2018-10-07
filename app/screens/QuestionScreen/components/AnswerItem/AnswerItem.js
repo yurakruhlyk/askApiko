@@ -9,10 +9,12 @@ import { colors } from '../../../../styles';
 import s from './styles';
 
 const AnswerItem = ({
+  _id,
   description,
   createdAt,
   isLoading,
   isError,
+  onRetrySendAnswerToQuestion,
 }) => (
   <View>
     <View style={s.topContainer}>
@@ -46,7 +48,11 @@ const AnswerItem = ({
           {
             isError
           &&
-          <Touchable useOpacity borderless onPress={() => {}}>
+          <Touchable
+            useOpacity
+            borderless
+            onPress={() => onRetrySendAnswerToQuestion(_id)}
+          >
             <Ionicons
               color={colors.accent}
               size={32}
@@ -68,10 +74,12 @@ const AnswerItem = ({
 );
 
 AnswerItem.propTypes = {
+  _id: T.string,
   description: T.string,
   createdAt: T.string,
   isLoading: T.bool,
   isError: T.bool,
+  onRetrySendAnswerToQuestion: T.func,
 };
 
 export default pure(AnswerItem);

@@ -11,6 +11,10 @@ import {
   sendAnswerToQuestionStart,
   sendAnswerToQuestionSuccess,
   sendAnswerToQuestionError,
+
+  retrySendAnswerToQuestionStart,
+  retrySendAnswerToQuestionSuccess,
+  retrySendAnswerToQuestionError,
 } from './actions';
 import Api from '../../api';
 import { answersSelectors } from './';
@@ -101,16 +105,31 @@ const sendAnswerToQuestion = (questionId, message) => async dispatch => {
 
     dispatch(sendAnswerToQuestionSuccess({ questionId, answerId, answer }));
   } catch (err) {
-    const errMessage = getErrMessage(err);
-
     dispatch(sendAnswerToQuestionError({ answerId }));
-    throw new Error(errMessage);
   }
 };
 
+const retrySendAnswerToQuestion = (answerId) => async (dispatch, getState) => {
+  try {
+    const {
+      questionId,
+      description: message,
+    } = answersSelectors.getAnswerById(getState(), answerId);
+
+    dispatch(retrySendAnswerToQuestionStart({ answerId }));
+
+    const res = await Api.sendAnswerToQuestion(questionId, message);
+    const { answer } = res.data;
+
+    dispatch(retrySendAnswerToQuestionSuccess({ questionId, answerId, answer }));
+  } catch (err) {
+    dispatch(retrySendAnswerToQuestionError({ answerId }));
+  }
+};
 
 export default {
   getAnswersByQuestionId,
   getAnswersByQuestionIdMore,
   sendAnswerToQuestion,
+  retrySendAnswerToQuestion,
 };

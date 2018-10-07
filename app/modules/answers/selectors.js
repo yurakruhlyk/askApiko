@@ -24,6 +24,11 @@ const getAnswersByQuestionId = createSelector(
   (ids, entities) => ids.map(id => entities[id]),
 );
 
+const getAnswerById = createSelector(
+  (state, id) => R.pathOr({}, ['answers', 'answersEntities', id])(state),
+  state => state,
+);
+
 const getCountAllAnswersByQuestionState = createSelector(
   R.path(['answers', 'countAllAnswersByQuestion']),
   state => state,
@@ -59,6 +64,7 @@ export default {
   getAnswersLoadingErrorState,
   getAnswersIdsByQuestionId,
   getAnswersByQuestionId,
+  getAnswerById,
   getCountAllAnswersByQuestionState,
   getAnswersCount,
   getAnswersLoadingMoreState,

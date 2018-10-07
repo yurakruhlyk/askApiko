@@ -33,6 +33,7 @@ const mapDispatchToProps = {
   getAnswers: answersOperations.getAnswersByQuestionId,
   getAnswersMore: answersOperations.getAnswersByQuestionIdMore,
   sendAnswerToQuestion: answersOperations.sendAnswerToQuestion,
+  retrySendAnswerToQuestion: answersOperations.retrySendAnswerToQuestion,
 };
 const enhancer = compose(
   withNavParams(['id']),
@@ -84,6 +85,8 @@ const enhancer = compose(
         AlertService.showErrorAlert(err.message);
       }
     },
+
+    retrySendAnswerToQuestion: props => id => props.retrySendAnswerToQuestion(id),
   }),
 
   withPropsOnChange(

@@ -33,6 +33,7 @@ const QuestionScreenView = ({
   onChangeMessage,
   message,
   sendAnswerToQuestion,
+  retrySendAnswerToQuestion,
   isRefreshing,
   onRefreshAnswers,
   isValidMessage,
@@ -45,8 +46,12 @@ const QuestionScreenView = ({
         R.isEmpty(answers) && s.containerCenter,
       ]}
       ItemSeparatorComponent={Separator}
-      renderItem={({ item }) =>
-        <AnswerItem {...item} />
+      renderItem={({ item }) => (
+        <AnswerItem
+          {...item}
+          onRetrySendAnswerToQuestion={retrySendAnswerToQuestion}
+        />
+      )
       }
       onEndReachedThreshold={0.7}
       onEndReached={getAnswersMore}
@@ -97,6 +102,7 @@ QuestionScreenView.propTypes = {
   onChangeMessage: T.func,
   message: T.string,
   sendAnswerToQuestion: T.func,
+  retrySendAnswerToQuestion: T.func,
   isValidMessage: T.bool,
 };
 
