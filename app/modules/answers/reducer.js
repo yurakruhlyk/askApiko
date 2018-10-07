@@ -49,6 +49,7 @@ export default handleActions(
     [types.GET_ANSWERS_BY_QUESTION_ID_MORE_SUCCESS]: mergeDeep(({ payload }, state) => ({
       isAnswersLoadingMore: false,
       isAnswersLoadingMoreError: null,
+      isAnswersHasNoMore: payload.hasNoMore,
 
       answersIds: {
         [payload.questionId]: R.uniq([
@@ -57,7 +58,6 @@ export default handleActions(
         ]),
       },
       answersEntities: payload.answersEntities,
-      isAnswersHasNoMore: payload.hasNoMore,
     })),
     [types.GET_ANSWERS_BY_QUESTION_ID_MORE_ERROR]: mergeDeep(({ payload }) => ({
       isAnswersLoadingMore: false,
@@ -65,13 +65,14 @@ export default handleActions(
     })),
 
     [types.SEND_ANSWER_TO_QUESTION_START]: mergeDeep(({ payload }, state) => ({
+      countAllAnswersByQuestion: state.countAllAnswersByQuestion + 1,
+
       answersIds: {
         [payload.questionId]: [
           ...state.answersIds[payload.questionId],
           payload.answerId,
         ],
       },
-
       answersEntities: payload.answer,
     })),
     [types.SEND_ANSWER_TO_QUESTION_SUCCESS]: mergeDeep(({ payload }, state) => ({
