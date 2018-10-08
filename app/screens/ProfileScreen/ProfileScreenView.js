@@ -1,9 +1,9 @@
 import React from 'react';
 import { View, Text } from 'react-native';
-import T from 'prop-types';
+// import T from 'prop-types';
 import { DrawerButton, Logo } from '../../components';
 import { headerStyles } from '../../styles';
-import s from './styles';
+// import s from './styles';
 
 const ProfileScreenView = () => (
   <View>

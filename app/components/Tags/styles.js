@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { colors, dimensions, fontSizes } from '../../styles';
+import { colors, fontSizes } from '../../styles';
 
 const styles = StyleSheet.create({
   tags: {
@@ -13,7 +13,6 @@ const styles = StyleSheet.create({
     marginRight: 6,
     paddingHorizontal: 5,
     paddingVertical: 2,
-    marginBottom: dimensions.indent,
   },
 });
 

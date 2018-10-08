@@ -26,7 +26,12 @@ const getQuestionsHasNoMoreState = createSelector(
   state => state,
 );
 
-const getQuestionsListState = createSelector(
+const getQuestionsCountState = createSelector(
+  R.path(['questions', 'questionsIds']),
+  ids => ids.length,
+);
+
+const getQuestionsState = createSelector(
   [
     R.pathOr([], ['questions', 'questionsIds']),
     R.pathOr({}, ['questions', 'questionsEntities']),
@@ -34,10 +39,11 @@ const getQuestionsListState = createSelector(
   (ids, entities) => ids.map(id => entities[id]),
 );
 
-const getQuestionsCountState = createSelector(
-  R.path(['questions', 'questionsIds']),
-  ids => ids.length,
+const getQuestionById = createSelector(
+  (state, id) => R.pathOr({}, ['questions', 'questionsEntities', id])(state),
+  state => state,
 );
+
 
 export default {
   getQuestionsLoadingState,
@@ -45,7 +51,8 @@ export default {
   getQuestionsLoadingMoreState,
   getQuestionsRefreshingState,
   getQuestionsHasNoMoreState,
-  getQuestionsListState,
   getQuestionsCountState,
+  getQuestionsState,
+  getQuestionById,
 };
 

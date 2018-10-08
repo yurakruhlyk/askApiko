@@ -1,5 +1,5 @@
 import didMountWithSetTimeout from './didMountWithSetTimeout';
-import paramsToProps from './paramsToProps';
+import withNavParams from './withNavParams';
 import setParamsOnDidMount from './setParamsOnDidMount';
 import withRef from './withRef';
 import withSpinnerWhileLoading from './withSpinnerWhileLoading';
@@ -9,7 +9,7 @@ import * as withLoadingModal from './withLoadingModal';
 
 export {
   didMountWithSetTimeout,
-  paramsToProps,
+  withNavParams,
   setParamsOnDidMount,
   withRef,
   withSpinnerWhileLoading,
