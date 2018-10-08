@@ -10,7 +10,6 @@ import {
 import { connect } from 'react-redux';
 import { questionsOperations, questionsSelectors } from '../../modules/questions';
 import { AlertService } from '../../services';
-import { onNavigate } from '../../utils/navHelpers';
 import screens from '../../constants/screens';
 import QuestionsScreenView from './QuestionsScreenView';
 
@@ -35,7 +34,7 @@ const enhancer = compose(
 
   withHandlers({
     navigateToQuestion: props => id =>
-      onNavigate(props.navigation, screens.Question, { id }),
+      props.navigation.navigate(screens.Question, { id }),
 
     getQuestionsMore: props => async () => {
       try {

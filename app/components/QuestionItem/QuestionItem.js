@@ -9,12 +9,13 @@ import s from './styles';
 import { colors } from '../../styles';
 
 const QuestionItem = ({
+  _id,
   title,
   tags,
   createdAt,
   onPress,
 }) => (
-  <Touchable onPress={onPress}>
+  <Touchable onPress={() => onPress(_id)}>
     <View style={s.container}>
       <View style={s.statusContainer}>
         <Text style={s.votes}>273</Text>
@@ -39,6 +40,7 @@ const QuestionItem = ({
 );
 
 QuestionItem.propTypes = {
+  _id: T.string,
   title: T.string,
   tags: T.array,
   createdAt: T.string,

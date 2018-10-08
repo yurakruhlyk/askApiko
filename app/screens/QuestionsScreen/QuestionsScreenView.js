@@ -34,7 +34,7 @@ const QuestionsScreenView = ({
       contentContainerStyle={R.isEmpty(questions) && s.containerCenter}
       ItemSeparatorComponent={Separator}
       renderItem={({ item }) =>
-        <QuestionItem {...item} onPress={navigateToQuestion(item._id)} />
+        <QuestionItem {...item} onPress={navigateToQuestion} />
       }
       onEndReachedThreshold={0.7}
       onEndReached={getQuestionsMore}
