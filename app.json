@@ -8,10 +8,22 @@
       "ios",
       "android"
     ],
-    "splash": {
-      "image": "./assets/images/logo.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+    "ios": {
+      "splash": {
+        "image": "./assets/images/logo.png",
+        "resizeMode": "contain",
+        "backgroundColor": "#ffffff"
+      },
+      "bundleIdentifier": "com.askApiko.askApiko",
+      "supportsTablet": false
+    },
+    "android": {
+      "splash": {
+        "image": "./assets/images/logo.png",
+        "resizeMode": "contain",
+        "backgroundColor": "#ffffff"
+      },
+      "package": "com.askApiko.askApiko"
     },
     "sdkVersion": "29.0.0"
   }
