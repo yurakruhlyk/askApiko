@@ -34,6 +34,7 @@ const styles = StyleSheet.create({
   },
   details: {
     flexDirection: 'row',
+    marginTop: dimensions.indent,
   },
   date: {
     fontSize: fontSizes.xsmall,

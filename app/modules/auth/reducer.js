@@ -31,6 +31,9 @@ export default handleActions(
     })),
 
     [types.SIGN_IN_START]: mergeDeep({ isSigningIn: true }),
+    [appTypes.INITIALIZED]: mergeDeep({
+      signedIn: true,
+    }),
     [types.SIGN_IN_SUCCESS]: mergeDeep({
       isSigningIn: false,
       signedIn: true,

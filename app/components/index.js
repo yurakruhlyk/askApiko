@@ -13,4 +13,5 @@ export { default as PageTitle } from './PageTitle/PageTitle';
 export { default as KeyboardAvoidingView } from './KeyboardAvoidingView/KeyboardAvoidingView';
 export { default as QuestionItem } from './QuestionItem/QuestionItem';
 export { default as Tags } from './Tags/Tags';
+export { default as Avatar } from './Avatar/Avatar';
 

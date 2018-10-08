@@ -21,6 +21,7 @@ const QuestionsScreenView = ({
   isRefreshing,
   getQuestionsMore,
   onRefreshQuestions,
+  navigateToQuestion,
 }) => (
   <View style={s.root}>
     <PageTitle
@@ -32,7 +33,9 @@ const QuestionsScreenView = ({
       keyExtractor={R.prop('_id')}
       contentContainerStyle={R.isEmpty(questions) && s.containerCenter}
       ItemSeparatorComponent={Separator}
-      renderItem={({ item }) => <QuestionItem {...item} />}
+      renderItem={({ item }) =>
+        <QuestionItem {...item} onPress={navigateToQuestion(item._id)} />
+      }
       onEndReachedThreshold={0.7}
       onEndReached={getQuestionsMore}
       refreshing={isRefreshing}
@@ -52,6 +55,7 @@ QuestionsScreenView.propTypes = {
   isRefreshing: T.bool,
   getQuestionsMore: T.func,
   onRefreshQuestions: T.func,
+  navigateToQuestion: T.func,
 };
 
 QuestionsScreenView.navigationOptions = ({ navigation }) => ({
