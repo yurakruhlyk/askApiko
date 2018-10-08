@@ -14,6 +14,10 @@ class Api {
     return new Promise(res => setTimeout(res, 1000));
   }
 
+  getMe() {
+    return axios.get(`${this._baseUrl}/users/my`);
+  }
+
   signUp(username, email, password) {
     return axios.post(`${this._baseUrl}/auth/sign-up`, {
       email,

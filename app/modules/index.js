@@ -1,11 +1,11 @@
-import app from './app';
 import auth from './auth';
 import questions from './questions';
+import user from './user';
 import answers from './answers';
 
 export default {
-  app,
   auth,
+  user,
   questions,
   answers,
 };

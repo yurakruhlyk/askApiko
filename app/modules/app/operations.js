@@ -1,8 +1,9 @@
 import { NetInfo } from 'react-native';
-import { NavigationService } from '../../services';
+import { AlertService, NavigationService } from '../../services';
 import Api, { SocketApi } from '../../api';
 import { authToken } from '../../utils/authToken';
 import { initialized } from './actions';
+import { userOperations } from '../user';
 import screens from '../../constants/screens';
 
 const initApi = token => () => {
@@ -22,12 +23,15 @@ const initialization = () => async dispatch => {
     if (token) {
       dispatch(initApi(token));
 
+      const res = await Api.getMe();
+
+      dispatch(userOperations.setUser(res.data.user));
       dispatch(initialized());
 
       NavigationService.navigate(screens.AuthorizedApp);
     }
   } catch (err) {
-    console.log(err);
+    AlertService.showErrorAlert('Invalid token. Please login again!');
   }
 };
 
