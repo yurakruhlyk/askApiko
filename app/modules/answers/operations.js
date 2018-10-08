@@ -51,9 +51,9 @@ const getAnswersByQuestionId = (questionId, refreshing = false) =>
 
 const getAnswersByQuestionIdMore = questionId => async (dispatch, getState) => {
   try {
-    const isLoading = answersSelectors.getAnswersLoadingState(getState());
-    const isLoadingMore = answersSelectors.getAnswersLoadingMoreState(getState());
-    const hasNoMore = answersSelectors.getAnswersHasNoMoreState(getState());
+    const isLoading = answersSelectors.getAnswersLoading(getState());
+    const isLoadingMore = answersSelectors.getAnswersLoadingMore(getState());
+    const hasNoMore = answersSelectors.getAnswersHasNoMore(getState());
     const count = answersSelectors.getAnswersCount(getState(), questionId);
     const limit = 10;
 

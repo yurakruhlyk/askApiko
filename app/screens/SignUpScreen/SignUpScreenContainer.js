@@ -18,7 +18,7 @@ import screens from '../../constants/screens';
 import SignUpScreenView from './SignUpScreenView';
 
 const mapStateToProps = state => ({
-  isLoading: authSelectors.getSigningUpState(state),
+  isLoading: authSelectors.getSigningUp(state),
 });
 
 const mapDispatchToProps = {

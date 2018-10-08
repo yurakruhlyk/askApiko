@@ -14,10 +14,10 @@ import screens from '../../constants/screens';
 import QuestionsScreenView from './QuestionsScreenView';
 
 const mapStateToProps = state => ({
-  isLoading: questionsSelectors.getQuestionsLoadingState(state),
-  isLoadingMore: questionsSelectors.getQuestionsLoadingMoreState(state),
-  isRefreshing: questionsSelectors.getQuestionsRefreshingState(state),
-  questions: questionsSelectors.getQuestionsState(state),
+  isLoading: questionsSelectors.getQuestionsLoading(state),
+  isLoadingMore: questionsSelectors.getQuestionsLoadingMore(state),
+  isRefreshing: questionsSelectors.getQuestionsRefreshing(state),
+  questions: questionsSelectors.getQuestions(state),
 });
 
 const mapDispatchToProps = {

@@ -1,37 +1,37 @@
 import { createSelector } from 'reselect';
 import R from 'ramda';
 
-const getQuestionsLoadingState = createSelector(
+const getQuestionsLoading = createSelector(
   R.path(['questions', 'isQuestionsLoading']),
   state => state,
 );
 
-const getQuestionsLoadingErrorState = createSelector(
+const getQuestionsLoadingError = createSelector(
   R.path(['questions', 'isQuestionsLoadingError']),
   state => state,
 );
 
-const getQuestionsLoadingMoreState = createSelector(
+const getQuestionsLoadingMore = createSelector(
   R.path(['questions', 'isQuestionsLoadingMore']),
   state => state,
 );
 
-const getQuestionsRefreshingState = createSelector(
+const getQuestionsRefreshing = createSelector(
   R.path(['questions', 'isQuestionsRefreshing']),
   state => state,
 );
 
-const getQuestionsHasNoMoreState = createSelector(
+const getQuestionsHasNoMore = createSelector(
   R.path(['questions', 'isQuestionsHasNoMore']),
   state => state,
 );
 
-const getQuestionsCountState = createSelector(
+const getQuestionsCount = createSelector(
   R.path(['questions', 'questionsIds']),
   ids => ids.length,
 );
 
-const getQuestionsState = createSelector(
+const getQuestions = createSelector(
   [
     R.pathOr([], ['questions', 'questionsIds']),
     R.pathOr({}, ['questions', 'questionsEntities']),
@@ -46,13 +46,13 @@ const getQuestionById = createSelector(
 
 
 export default {
-  getQuestionsLoadingState,
-  getQuestionsLoadingErrorState,
-  getQuestionsLoadingMoreState,
-  getQuestionsRefreshingState,
-  getQuestionsHasNoMoreState,
-  getQuestionsCountState,
-  getQuestionsState,
+  getQuestionsLoading,
+  getQuestionsLoadingError,
+  getQuestionsLoadingMore,
+  getQuestionsRefreshing,
+  getQuestionsHasNoMore,
+  getQuestionsCount,
+  getQuestions,
   getQuestionById,
 };
 

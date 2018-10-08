@@ -1,12 +1,12 @@
 import { createSelector } from 'reselect';
 import R from 'ramda';
 
-const getAnswersLoadingState = createSelector(
+const getAnswersLoading = createSelector(
   R.path(['answers', 'isAnswersLoading']),
   state => state,
 );
 
-const getAnswersLoadingErrorState = createSelector(
+const getAnswersLoadingError = createSelector(
   R.path(['answers', 'isAnswersLoadingError']),
   state => state,
 );
@@ -29,7 +29,7 @@ const getAnswerById = createSelector(
   state => state,
 );
 
-const getCountAllAnswersByQuestionState = createSelector(
+const getCountAllAnswersByQuestion = createSelector(
   R.path(['answers', 'countAllAnswersByQuestion']),
   state => state,
 );
@@ -39,36 +39,36 @@ export const getAnswersCount = createSelector(
   ids => ids.length,
 );
 
-const getAnswersLoadingMoreState = createSelector(
+const getAnswersLoadingMore = createSelector(
   R.path(['answers', 'isAnswersLoadingMore']),
   state => state,
 );
 
-const getAnswersLoadingMoreErrorState = createSelector(
+const getAnswersLoadingMoreError = createSelector(
   R.path(['answers', 'isAnswersLoadingMoreError']),
   state => state,
 );
 
-const getAnswersRefreshingState = createSelector(
+const getAnswersRefreshing = createSelector(
   R.path(['answers', 'isAnswersRefreshing']),
   state => state,
 );
 
-const getAnswersHasNoMoreState = createSelector(
+const getAnswersHasNoMore = createSelector(
   R.path(['answers', 'isAnswersHasNoMore']),
   state => state,
 );
 
 export default {
-  getAnswersLoadingState,
-  getAnswersLoadingErrorState,
+  getAnswersLoading,
+  getAnswersLoadingError,
   getAnswersIdsByQuestionId,
   getAnswersByQuestionId,
   getAnswerById,
-  getCountAllAnswersByQuestionState,
+  getCountAllAnswersByQuestion,
   getAnswersCount,
-  getAnswersLoadingMoreState,
-  getAnswersLoadingMoreErrorState,
-  getAnswersHasNoMoreState,
-  getAnswersRefreshingState,
+  getAnswersLoadingMore,
+  getAnswersLoadingMoreError,
+  getAnswersHasNoMore,
+  getAnswersRefreshing,
 };

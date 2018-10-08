@@ -13,7 +13,7 @@ import { getErrMessage } from '../../utils/errorHelper';
 
 const getQuestions = (refreshing = false) => async (dispatch, getState) => {
   try {
-    const isLoading = questionsSelectors.getQuestionsLoadingState(getState());
+    const isLoading = questionsSelectors.getQuestionsLoading(getState());
 
     if (isLoading) {
       return;
@@ -35,9 +35,9 @@ const getQuestions = (refreshing = false) => async (dispatch, getState) => {
 
 export const getQuestionsMore = () => async (dispatch, getState) => {
   try {
-    const isLoadingMore = questionsSelectors.getQuestionsLoadingMoreState(getState());
-    const count = questionsSelectors.getQuestionsCountState(getState());
-    const hasNoMore = questionsSelectors.getQuestionsHasNoMoreState(getState());
+    const isLoadingMore = questionsSelectors.getQuestionsLoadingMore(getState());
+    const count = questionsSelectors.getQuestionsCount(getState());
+    const hasNoMore = questionsSelectors.getQuestionsHasNoMore(getState());
     const limit = 10;
 
     if (isLoadingMore || hasNoMore) {

@@ -20,13 +20,13 @@ import { trim } from '../../utils/textValidationHelper';
 import QuestionScreenView from './QuestionScreenView';
 
 const mapStateToProps = (state, props) => ({
-  isAuthorized: authSelectors.getSignedInState(state),
-  isLoading: answersSelectors.getAnswersLoadingState(state),
-  isRefreshing: answersSelectors.getAnswersRefreshingState(state),
-  isLoadingMore: answersSelectors.getAnswersLoadingMoreState(state),
+  isAuthorized: authSelectors.getSignedIn(state),
+  isLoading: answersSelectors.getAnswersLoading(state),
+  isRefreshing: answersSelectors.getAnswersRefreshing(state),
+  isLoadingMore: answersSelectors.getAnswersLoadingMore(state),
   question: questionsSelectors.getQuestionById(state, props.id),
   answers: answersSelectors.getAnswersByQuestionId(state, props.id),
-  answersCount: answersSelectors.getCountAllAnswersByQuestionState(state),
+  answersCount: answersSelectors.getCountAllAnswersByQuestion(state),
 });
 
 const mapDispatchToProps = {
