@@ -4,6 +4,8 @@ import AuthorDetail from './AuthorDetail/AuthorDetail';
 import AnswersListHeader from './AnswersListHeader/AnswersListHeader';
 import AnswerItem from './AnswerItem/AnswerItem';
 import AnswersListFooter from './AnswersListFooter/AnswersListFooter';
+import AnswersListEmpty from './AnswersListEmpty/AnswerListEmpty';
+
 
 export {
   QuestionDetail,
@@ -12,4 +14,5 @@ export {
   AnswersListHeader,
   AnswerItem,
   AnswersListFooter,
+  AnswersListEmpty,
 };

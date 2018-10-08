@@ -1,22 +1,14 @@
 import * as R from 'ramda';
 import React from 'react';
-import {
-  FlatList,
-  Text,
-  View,
-} from 'react-native';
+import { FlatList, View } from 'react-native';
 import T from 'prop-types';
-import {
-  Logo,
-  RootSpinner,
-  Separator,
-  Spinner,
-} from '../../components';
+import { Logo, Separator, Spinner } from '../../components';
 import {
   QuestionDetail,
   AnswersListHeader,
   AnswerItem,
   AnswersListFooter,
+  AnswersListEmpty,
 } from './components';
 import { headerStyles } from '../../styles';
 import s from './styles';
@@ -42,9 +34,6 @@ const QuestionScreenView = ({
     <FlatList
       data={answers}
       keyExtractor={R.prop('_id')}
-      contentContainerStyle={[
-        R.isEmpty(answers) && s.containerCenter,
-      ]}
       ItemSeparatorComponent={Separator}
       renderItem={({ item }) => (
         <AnswerItem
@@ -68,11 +57,7 @@ const QuestionScreenView = ({
           <AnswersListHeader count={answersCount} />
         </View>
       }
-      ListEmptyComponent={
-        isLoading
-          ? <RootSpinner />
-          : <Text>Empty</Text>
-      }
+      ListEmptyComponent={<AnswersListEmpty isLoading={isLoading} />}
       ListFooterComponent={
         isLoadingMore &&
         <View style={s.spinnerContainer}>
