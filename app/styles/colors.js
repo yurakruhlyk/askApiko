@@ -18,6 +18,8 @@ const colors = {
   separator,
   border,
 
+  // Components
+
   header: {
     background: whiteSmoke,
   },
@@ -88,6 +90,10 @@ const colors = {
     messageContainer: white,
   },
 
+  profileDetails: {
+    background: white,
+  },
+
   // Screens
 
   signUpScreen: {
@@ -99,6 +105,10 @@ const colors = {
   },
 
   questionScreen: {
+    background: whiteSmoke,
+  },
+
+  profileScreen: {
     background: whiteSmoke,
   },
 

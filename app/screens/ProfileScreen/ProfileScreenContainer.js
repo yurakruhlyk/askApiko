@@ -1,15 +1,14 @@
 import { compose, hoistStatics } from 'recompose';
-// import { connect } from 'react-redux';
+import { connect } from 'react-redux';
 import ProfileScreenView from './ProfileScreenView';
+import { userSelectors } from '../../modules/user';
 
-// const mapStateToProps = state => ({
-// });
-//
-// const mapDispatchToProps = {
-// };
+const mapStateToProps = state => ({
+  user: userSelectors.getUserState(state),
+});
 
 const enhancer = compose(
-  // connect(mapStateToProps, mapDispatchToProps),
+  connect(mapStateToProps),
 );
 
 export default hoistStatics(enhancer)(ProfileScreenView);

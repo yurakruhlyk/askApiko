@@ -4,12 +4,13 @@ import T from 'prop-types';
 import moment from 'moment';
 import { Avatar } from '../../../../components';
 import s from './styles';
-import avatar from '../../../../../assets/images/avatar.png';
+
+import mockAvatar from '../../../../../assets/images/avatar.png';
 
 const authorDetails = ({ asked, date }) => (
   <View style={s.root}>
     <View style={s.authorDetails}>
-      <Avatar source={avatar} author />
+      <Avatar source={mockAvatar} author />
       <Text style={s.fullName}>James Dove</Text>
     </View>
     <View style={s.userActionDetails}>
